@@ -15,25 +15,12 @@ void pattern2Clicks() {
 }
 
 void pattern2Draw() {
+  noStroke();
   int i = 0;
-  while (i < 256) {
-    colorgeneration(i);
-    rect (squareX, squareY, 50, 50);
-    squareX = squareY + 50;
-    if (squareX == 800 & squareY < 800) {
-      squareY = squareY + 50;
-      squareX = 0;
-   }
+  while (i < squarenums) {
+    brightnesschange = dist(mouseX, mouseY, squareX[i], squareY[i]);
+    fill (pattern2r[i], pattern2g[i], pattern2b[i], brightnesschange/5);
+    rect (squareX[i], squareY[i], 50, 50);
    i = i + 1;
   }
 }
-
-void colorgeneration(int i) {
-  pattern2r[i] = random(0,255);
-  pattern2g[i] = random(0,255);
-  pattern2b[i] = random(0,255);
-  fill (pattern2r[i], pattern2g[i], pattern2b[i]);
-}
-
-
-  
