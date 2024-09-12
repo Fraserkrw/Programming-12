@@ -14,12 +14,24 @@ float leftbuttonX, leftbuttonY, rightbuttonX, rightbuttonY;
 float pattern1X, pattern1Y, pattern1D, pattern1rotate, pattern1R, pattern1G, pattern1B;
 
 //Pattern2
+int tempX, tempY;
 float[] pattern2r;
 float[] pattern2g;
 float[] pattern2b;
-int[] square;
 int squarenums;
-int squareX, squareY;
+int[] squareX, squareY;
+float brightnesschange;
+
+//Pattern3
+int numslines;
+float[] lineX;
+float[] lineY;
+float[] pattern3r;
+float[] pattern3g;
+float[] pattern3b;
+float ax, ay;
+float yoff, yoff2, yoff3;
+float counter, counter2, counter3;
 
 void setup() {
   size (800, 800);
@@ -45,9 +57,59 @@ void setup() {
   pattern2r = new float [squarenums];
   pattern2g = new float [squarenums];
   pattern2b = new float [squarenums];
-  square = new int[squarenums];
-  squareX = 0;
-  squareY = 0;
+  squareX = new int [squarenums];
+  squareY = new int [squarenums];
+  tempX = 0;
+  tempY = 0;
+  
+  int i = 0;
+  while (i < squarenums) {
+   pattern2r[i] = random (0, 150);
+   pattern2g[i] = random (0, 200);
+   pattern2b[i] = 255;
+   i++;
+  }
+  
+  i = 0;
+  while (i < squarenums) {
+   squareX[i] = tempX;
+   squareY[i] = tempY;
+   tempX = tempX + 50;
+   if (tempX == width) {
+     tempX = 0;
+     tempY = tempY + 50;
+   }
+   i++;
+  }
+  
+  //Pattern3
+  numslines = 160;
+  lineX = new float [numslines];
+  lineY = new float [numslines];
+  pattern3r = new float [numslines];
+  pattern3g = new float [numslines];
+  pattern3b = new float [numslines];
+  ay = 400;
+  ax = 0;
+  counter = 0;
+  counter2 = 0;
+  counter3 = 0;
+  
+  i = 0;
+  while (i < numslines) {
+   lineX[i] = ax;
+   lineY[i] = ay;
+   ax = ax + 5;
+   i++;
+  }
+  
+  i = 0;
+  while (i < numslines) {
+   pattern3r[i] = random (0, 250);
+   pattern3g[i] = random (0, 250);
+   pattern3b[i] = random (0, 250);
+   i++;
+  }
 }
 
 void draw() {
@@ -63,6 +125,8 @@ void draw() {
 }
 
 void buttonSetup() {
+  stroke(0);
+  strokeWeight(3);
   fill(134, 132, 127);
   circle (leftbuttonX, leftbuttonY, 100);
   circle (rightbuttonX, rightbuttonY, 100);
