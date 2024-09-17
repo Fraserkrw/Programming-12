@@ -32,7 +32,6 @@ void PlayerTurnNotification() {
       textFont (KidsMagazine);
       textSize(40);
       text ("BLUE STARTS", width/2, height/2);
-      println (timer);
       
       //Timer
       timer = timer - 0.5;
@@ -45,7 +44,6 @@ void PlayerTurnNotification() {
       textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
-      println (timer);
       
       //Timer
       timer = timer - 1;
@@ -77,7 +75,7 @@ void PlayerScoreTracking() {
 void CardSetup() {
   int i = 0;
   //if (timer == 0) {
-  while (i < cardnums) {
+  while (i < cardnums/2) {
     if (cardchosen[i] == false) {
       manageCards(i);
     }
@@ -106,4 +104,7 @@ void manageCards(int i) {
   
   //Cards
   rect(cardX[i], cardY[i], 40, 50);
+  fill (0);
+  textSize(10);
+  text(cardtype1[i], cardX[i]+15, cardY[i]+20);
 }
