@@ -17,8 +17,8 @@ float[] cardX;
 float[] cardY;
 int[] cardtype1;
 int[] cardtype2;
-int cardtrackerinitial;
-int cardtrackerfinal;
+ArrayList<Integer> cards;
+int listchoose;
 boolean[] cardchosen;
 int cardnums;
 int xsetup;
@@ -42,14 +42,13 @@ void setup() {
   Player2Score = 0;
 
   //Game
-  cardnums = 42;
+  cardnums = 36;
   cardX = new float[cardnums];
   cardY = new float[cardnums];
   cardchosen = new boolean[cardnums];
   cardtype1 = new int[cardnums/2];
   cardtype2 = new int[cardnums/2];
-  cardtrackerinitial = 0;
-  cardtrackerfinal = 0;
+  cards = new ArrayList();
   timer = 50;
   xsetup = 25;
   ysetup = 125;
@@ -69,17 +68,34 @@ void setup() {
 
   i = 0;
   while (i < cardnums/2) {
-    cardtype1[i] = (int) random(0, cardnums/2);
-    cardtrackerinitial = cardtrackerinitial + 1;
-    while (cardtrackerfinal <= cardtrackerinitial) {
-      if (cardtype1[i] == cardtype1[cardtrackerfinal]) {
-        cardtype1[i] = (int) random(0, cardnums/2);
-      }
-     cardtrackerfinal = cardtrackerfinal+1;
-    }
-    cardtrackerfinal = 0;
-    println(cardtrackerinitial);
-   i++;
+  cards.add(i);
+  i++;
+  }
+  
+  i = 0;
+  while (i < cardnums/2) {
+  listchoose = (int) random(0, cards.size());
+  cardtype1[i] = cards.get(listchoose);
+  cards.remove(listchoose);
+  println(cardtype1[i]);
+  i++;
+  }
+  
+  cards.clear();
+  
+  i = 0;
+  while (i < cardnums/2) {
+  cards.add(i);
+  i++;
+  }
+  
+  i = 0;
+  while (i < cardnums/2) {
+  listchoose = (int) random(0, cards.size());
+  cardtype2[i] = cards.get(listchoose);
+  cards.remove(listchoose);
+  println(cardtype2[i]);
+  i++;
   }
 }
 
