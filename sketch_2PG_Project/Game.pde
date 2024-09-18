@@ -74,14 +74,12 @@ void PlayerScoreTracking() {
 
 void CardSetup() {
   int i = 0;
-  //if (timer == 0) {
-  while (i < cardnums/2) {
+  while (i < cardnums) {
     if (cardchosen[i] == false) {
       manageCards(i);
     }
    i++;
   }
-  //}
 }
 
 void manageCards(int i) {
@@ -106,5 +104,9 @@ void manageCards(int i) {
   rect(cardX[i], cardY[i], 40, 50);
   fill (0);
   textSize(10);
+  if (i <= cardnums/2) {
   text(cardtype1[i], cardX[i]+15, cardY[i]+20);
+  } else if (i > cardnums/2) {
+  text(cardtype2[i], cardX[i]+15, cardY[i]+20);
+  }
 }
