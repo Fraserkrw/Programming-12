@@ -6,7 +6,13 @@ void Game() {
 }
 
 void gameClicks() {
-  
+  int i = 0;
+  while (i < cardnums) {
+    if (cardchosen[i] == false) {
+     CardClicked(i);
+   }
+  i++;
+ }
 }
 
 void BackgroundSetup() {
@@ -29,7 +35,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (141, 179, 211);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("BLUE STARTS", width/2, height/2);
       
@@ -41,12 +47,12 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (237, 183, 117);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
       
       //Timer
-      timer = timer - 1;
+      timer = timer - 0.5;
     }
   }
 }
@@ -61,13 +67,13 @@ void PlayerScoreTracking() {
   //Player1 Score
   noStroke();
   fill (141, 179, 211);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 270, 35);
 
   //Player2 Score
   fill (237, 183, 117);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 330, 35);
 }
@@ -101,12 +107,29 @@ void manageCards(int i) {
   }
   
   //Cards
-  rect(cardX[i], cardY[i], 40, 50);
+  rect(cardX[i], cardY[i], cardD[i], 50);
   fill (0);
   textSize(10);
-  if (i <= cardnums/2) {
-  text(cardtype1[i], cardX[i]+15, cardY[i]+20);
-  } else if (i > cardnums/2) {
-  text(cardtype2[i], cardX[i]+15, cardY[i]+20);
+  if (i < cardnums) {
+  text(cardtype[i], cardX[i]+15, cardY[i]+20);
+  }
+  
+  //Card Animation
+  if (cardanimation == true) {
+   cardtimer[i] = 100;
+     while (cardtimer[i] > 100) {
+       cardD[i] = cardD[i] - 1;
+       cardtimer[i] = cardtimer[i] - 1;
+    }
+   cardtimer[i] = 0;
+   cardanimation = false;
+  }
+}
+
+void CardClicked(int i) {
+  if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
+    if (cardtype[i] == 1) {
+      cardanimation = true;
+    } 
   }
 }
