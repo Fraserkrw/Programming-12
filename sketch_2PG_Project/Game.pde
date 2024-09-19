@@ -47,7 +47,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (237, 183, 117);
-      //textFont (KidsMagazine);
+      textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
       
@@ -67,13 +67,13 @@ void PlayerScoreTracking() {
   //Player1 Score
   noStroke();
   fill (141, 179, 211);
-  //textFont (KidsMagazine);
+  textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 270, 35);
 
   //Player2 Score
   fill (237, 183, 117);
-  //textFont (KidsMagazine);
+  textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 330, 35);
 }
@@ -114,22 +114,26 @@ void manageCards(int i) {
   text(cardtype[i], cardX[i]+15, cardY[i]+20);
   }
   
-  //Card Animation
+  ////Card Animation
+  if (cardD[cardClicked] > 0) {
   if (cardanimation == true) {
-   cardtimer[i] = 100;
-     while (cardtimer[i] > 100) {
-       cardD[i] = cardD[i] - 1;
-       cardtimer[i] = cardtimer[i] - 1;
+   cardtimer = 80;
+   while (cardtimer > 0) {
+       cardD[cardClicked] = cardD[cardClicked] - 1;
+       cardtimer = cardtimer - 1;
+       println(cardD[cardClicked]);
     }
-   cardtimer[i] = 0;
+   cardtimer = 0;
    cardanimation = false;
   }
+ }
 }
 
 void CardClicked(int i) {
   if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
     if (cardtype[i] == 1) {
       cardanimation = true;
+      cardClicked = i;
     } 
   }
 }
