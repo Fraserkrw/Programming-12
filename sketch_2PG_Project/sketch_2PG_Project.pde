@@ -13,10 +13,12 @@ int PlayerTurn;
 int Player1Score;
 int Player2Score;
 float timer;
+float[] cardtimer;
 float[] cardX;
 float[] cardY;
-int[] cardtype1;
-int[] cardtype2;
+float[] cardD;
+boolean cardanimation;
+int[] cardtype;
 ArrayList<Integer> cards;
 int listchoose;
 boolean[] cardchosen;
@@ -34,7 +36,7 @@ void setup() {
   mode = INTRO;
 
   //Initialize Fonts
-  KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
 
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -45,10 +47,12 @@ void setup() {
   cardnums = 36;
   cardX = new float[cardnums];
   cardY = new float[cardnums];
+  cardD = new float[cardnums];
+  cardtimer = new float[cardnums];
   cardchosen = new boolean[cardnums];
-  cardtype1 = new int[cardnums/2];
-  cardtype2 = new int[cardnums/2];
+  cardtype = new int[cardnums];
   cards = new ArrayList();
+  cardanimation = false;
   timer = 50;
   xsetup = 25;
   ysetup = 125;
@@ -57,9 +61,11 @@ void setup() {
   while (i < cardnums) {
     cardX[i] = xsetup;
     cardY[i] = ysetup;
+    cardD[i] = 40;
+    cardtimer[i] = 0;
     cardchosen[i] = false;
     xsetup = xsetup + 100;
-    if (xsetup > 700) {
+    if (xsetup >= 600) {
       xsetup = 25;
       ysetup = ysetup + 100;
     }
@@ -69,32 +75,15 @@ void setup() {
   i = 0;
   while (i < cardnums/2) {
   cards.add(i);
-  i++;
-  }
-  
-  i = 0;
-  while (i < cardnums/2) {
-  listchoose = (int) random(0, cards.size());
-  cardtype1[i] = cards.get(listchoose);
-  cards.remove(listchoose);
-  println(cardtype1[i]);
-  i++;
-  }
-  
-  cards.clear();
-  
-  i = 0;
-  while (i < cardnums/2) {
   cards.add(i);
   i++;
   }
   
   i = 0;
-  while (i < cardnums/2) {
+  while (i < cardnums) {
   listchoose = (int) random(0, cards.size());
-  cardtype2[i] = cards.get(listchoose);
+  cardtype[i] = cards.get(listchoose);
   cards.remove(listchoose);
-  println(cardtype2[i]);
   i++;
   }
 }
