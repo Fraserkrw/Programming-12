@@ -133,43 +133,60 @@ void manageCards(int i) {
   //Cards
   rect(cardX[i], cardY[i], cardD[i], 50);
   
-  ////Card Animation
-  if (cardD[cardClicked] > -40 && cardanimation == true) {
+  ////Card Animation Initial
+  if (cardtrack <= 2 && cardanimation == true) {
     cardD[cardClicked] = cardD[cardClicked] - animationSpeed;
     cardX[cardClicked] = cardX[cardClicked] + animationSpeed/2;
   if (cardD[cardClicked] <= -40) {
    cardanimation = false;
+   cardD[cardClicked] = -40;
    }
   }
+  
+  //Card Animation After 2 Cards Selected
+  if (waitingtoFlip == false && currentDelay == 0) {
+     cardD[card1number] = cardD[card1number] + animationSpeed;
+     cardX[card1number] = cardX[card1number] - animationSpeed/2;
+     cardD[card2number] = cardD[card2number] + animationSpeed;
+     cardX[card2number] = cardX[card2number] - animationSpeed/2;
+  }
+  if (cardD[card1number] >= 40 && cardD[card2number] >= 40) {
+     cardanimation = false;
+     currentDelay = 2400;
+  }
+  
+  //Card Text
   if (clicked[i] == true && cardanimation == false) {
    fill (0);
    textSize(20);
    text(cardtype[i], cardX[i]-20, cardY[i]+25);
    }
+   
+   //Card Check to see if match
    if (cardtrack == 2) {
      if (card1chosen == card2chosen) {
       cardcorrect[card1number] = true;
       cardcorrect[card2number] = true;
       cardtrack = 0;
-    } else {
+    } else if (card1chosen != card2chosen) {
       waitingtoFlip = true;
-      currentDelay = flipbackDelay;
     }
-     if (waitingtoFlip == true) { // && cardD[card2number] <= 40 && cardD[card1number] <= 40) {
-      currentDelay = currentDelay - 1;
-       if (currentDelay <= 0) {
+   }
+   
+   //What happens after cards do not match
+     if (waitingtoFlip == true) {
+      if (currentDelay > 0) {
+        currentDelay = currentDelay - frameSpeed;
+       }
+      if (currentDelay <= 0) {
+        cardanimation = true;
+        cardtrack = 0;
         clicked[card1number] = false;
         clicked[card2number] = false;
-        cardD[card1number] = cardD[card1number] + animationSpeed;
-        cardX[card1number] = cardX[card1number] - animationSpeed/2;
-        cardD[card2number] = cardD[card2number] + animationSpeed;
-        cardX[card2number] = cardX[card2number] - animationSpeed/2;
         waitingtoFlip = false;
-        cardtrack = 0;
        }
       }
-     }
-     println(currentDelay);
+      println (currentDelay);
     }
 
 void CardClicked(int i) {
