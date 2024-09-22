@@ -13,16 +13,22 @@ int PlayerTurn;
 int Player1Score;
 int Player2Score;
 float timer;
-float cardtimer;
 float[] cardX;
 float[] cardY;
 float[] cardD;
+boolean[] clicked;
 int cardClicked;
+int cardtrack;
+int card1chosen;
+int card2chosen;
+int card1number;
+int card2number;
 boolean cardanimation;
+float animationSpeed;
 int[] cardtype;
 ArrayList<Integer> cards;
 int listchoose;
-boolean[] cardchosen;
+boolean[] cardcorrect;
 int cardnums;
 int xsetup;
 int ysetup;
@@ -37,7 +43,7 @@ void setup() {
   mode = INTRO;
 
   //Initialize Fonts
-  KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
 
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -49,11 +55,13 @@ void setup() {
   cardX = new float[cardnums];
   cardY = new float[cardnums];
   cardD = new float[cardnums];
-  cardtimer = 0;
-  cardchosen = new boolean[cardnums];
+  cardtrack = 0;
+  cardcorrect = new boolean[cardnums];
+  clicked = new boolean[cardnums];
   cardtype = new int[cardnums];
   cards = new ArrayList();
   cardanimation = false;
+  animationSpeed = 0.1;
   cardClicked = 0;
   timer = 50;
   xsetup = 25;
@@ -64,7 +72,8 @@ void setup() {
     cardX[i] = xsetup;
     cardY[i] = ysetup;
     cardD[i] = 40;
-    cardchosen[i] = false;
+    cardcorrect[i] = false;
+    clicked[i] = false;
     xsetup = xsetup + 100;
     if (xsetup >= 600) {
       xsetup = 25;
