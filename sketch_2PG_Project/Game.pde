@@ -156,18 +156,25 @@ void manageCards(int i) {
   }
   
   //Card Text
-  if (clicked[i] == true && cardanimation == false) {
+  //if (clicked[i] == true && cardanimation == false) {
    fill (0);
    textSize(20);
    text(cardtype[i], cardX[i]-20, cardY[i]+25);
-   }
+   //}
    
    //Card Check to see if match
    if (cardtrack == 2) {
      if (card1chosen == card2chosen) {
-      cardcorrect[card1number] = true;
-      cardcorrect[card2number] = true;
-      cardtrack = 0;
+       if (currentDelay > 0) {
+        currentDelay = currentDelay - frameSpeed;
+       }
+      if (currentDelay <= 0) {
+        cardcorrect[card1number] = true;
+        cardcorrect[card2number] = true;
+        cardtrack = 0;
+        waitingtoFlip = false;
+      }
+      //cardtrack = 0;
     } else if (card1chosen != card2chosen) {
       waitingtoFlip = true;
     }
