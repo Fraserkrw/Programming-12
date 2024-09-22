@@ -150,13 +150,27 @@ void manageCards(int i) {
      if (card1chosen == card2chosen) {
       cardcorrect[card1number] = true;
       cardcorrect[card2number] = true;
-    } else {
       cardtrack = 0;
-      cardD[card1number] = 40;
-      cardD[card2number] = 40;
+    } else {
+      waitingtoFlip = true;
+      currentDelay = flipbackDelay;
+    }
+     if (waitingtoFlip == true) { // && cardD[card2number] <= 40 && cardD[card1number] <= 40) {
+      currentDelay = currentDelay - 1;
+       if (currentDelay <= 0) {
+        clicked[card1number] = false;
+        clicked[card2number] = false;
+        cardD[card1number] = cardD[card1number] + animationSpeed;
+        cardX[card1number] = cardX[card1number] - animationSpeed/2;
+        cardD[card2number] = cardD[card2number] + animationSpeed;
+        cardX[card2number] = cardX[card2number] - animationSpeed/2;
+        waitingtoFlip = false;
+        cardtrack = 0;
+       }
+      }
      }
-   }
- }
+     println(currentDelay);
+    }
 
 void CardClicked(int i) {
   if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
@@ -164,13 +178,22 @@ void CardClicked(int i) {
       cardClicked = i;
       clicked[i] = true; 
       cardtrack = cardtrack + 1;
+      if (cardtrack == 1) {
       card1chosen = cardtype[i];
       card1number = i;
+      }
       if (cardtrack == 2) {
       card2number = i;
       card2chosen = cardtype[i];
      }
-    println ("card1number: " + card1number);
-    println ("card2chosen: " + card1chosen);
+     if (cardtrack == 1) {
+      println ("card1number: " + card1number);
+      println ("card1chosen: " + card1chosen);
+     }
+     if (cardtrack == 2) {
+      println ("card2number: " + card2number);
+      println ("card2chosen: " + card2chosen);
+     }
+     println (cardtrack);
   }
 }
