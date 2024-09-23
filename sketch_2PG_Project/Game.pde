@@ -3,6 +3,7 @@ void Game() {
   PlayerScoreTracking();
   CardSetup();
   PlayerTurnNotification();
+  GameEnds();
 }
 
 void gameClicks() {
@@ -35,7 +36,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (141, 179, 211);
-      //textFont (KidsMagazine);
+      textFont (KidsMagazine);
       textSize(40);
       text ("BLUE STARTS", width/2, height/2);
       
@@ -47,7 +48,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (237, 183, 117);
-      //textFont (KidsMagazine);
+      textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
       
@@ -67,13 +68,13 @@ void PlayerScoreTracking() {
   //Player1 Score
   noStroke();
   fill (141, 179, 211);
-  //textFont (KidsMagazine);
+  textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 270, 35);
 
   //Player2 Score
   fill (237, 183, 117);
-  //textFont (KidsMagazine);
+  textFont (KidsMagazine);
   textSize (20);
   text (Player2Score, 330, 35);
 }
@@ -165,28 +166,56 @@ void manageCards(int i) {
    //Card Check to see if match
    if (cardtrack == 2) {
      if (card1chosen == card2chosen) {
-       if (currentDelay > 0) {
+       waitingtoFlip = true;
+      // if (currentDelay > 0) {
+      //  currentDelay = currentDelay - frameSpeed;
+      //  println (currentDelay);
+      // }
+      //if (currentDelay <= 0) {
+      //  cardcorrect[card1number] = true;
+      //  cardcorrect[card2number] = true;
+      //  cardtrack = 0;
+      //  waitingtoFlip = false;
+      //  currentDelay = 2400;
+      //  if (PlayerTurn == 1) {
+      //    Player1Score = Player1Score + 1;
+      //    cardscorrect = cardscorrect + 2;
+      //  }
+      //  if (PlayerTurn == 2) {
+      //    Player2Score = Player2Score + 1;
+      //    cardscorrect = cardscorrect + 2;
+      //  }
+       //println (cardscorrect);
+       //println (currentDelay);
+      //}
+    } else if (card1chosen != card2chosen) {
+      waitingtoFlip = true;
+    }
+   
+   //What happens after cards do not match
+     if (waitingtoFlip == true) {
+       if (card1chosen == card2chosen) {
+        if (currentDelay > 0) {
         currentDelay = currentDelay - frameSpeed;
+        println (currentDelay);
        }
       if (currentDelay <= 0) {
         cardcorrect[card1number] = true;
         cardcorrect[card2number] = true;
         cardtrack = 0;
         waitingtoFlip = false;
+        currentDelay = 2400;
         if (PlayerTurn == 1) {
           Player1Score = Player1Score + 1;
+          cardscorrect = cardscorrect + 2;
         }
         if (PlayerTurn == 2) {
           Player2Score = Player2Score + 1;
+          cardscorrect = cardscorrect + 2;
         }
+       }
       }
-    } else if (card1chosen != card2chosen) {
-      waitingtoFlip = true;
-    }
-   }
-   
-   //What happens after cards do not match
-     if (waitingtoFlip == true) {
+     if (card1chosen != card2chosen) {
       if (currentDelay > 0) {
         currentDelay = currentDelay - frameSpeed;
        }
@@ -203,7 +232,9 @@ void manageCards(int i) {
         }
        }
       }
+     }
     }
+   }
 
 void CardClicked(int i) {
   if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
@@ -220,13 +251,19 @@ void CardClicked(int i) {
       card2chosen = cardtype[i];
      }
      //if (cardtrack == 1) {
-      //println ("card1number: " + card1number);
-      //println ("card1chosen: " + card1chosen);
-    // }
+     // println ("card1number: " + card1number);
+     // println ("card1chosen: " + card1chosen);
+     //}
      //if (cardtrack == 2) {
      // println ("card2number: " + card2number);
      // println ("card2chosen: " + card2chosen);
-    // }
+     //}
      //println (cardtrack);
+  }
+}
+
+void GameEnds() {
+  if (cardscorrect == cardnums) {
+    mode = GAMEOVER;
   }
 }
