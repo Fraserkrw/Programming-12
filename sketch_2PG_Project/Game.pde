@@ -75,7 +75,7 @@ void PlayerScoreTracking() {
   fill (237, 183, 117);
   //textFont (KidsMagazine);
   textSize (20);
-  text (Player1Score, 330, 35);
+  text (Player2Score, 330, 35);
 }
 
 void CardSetup() {
@@ -173,8 +173,13 @@ void manageCards(int i) {
         cardcorrect[card2number] = true;
         cardtrack = 0;
         waitingtoFlip = false;
+        if (PlayerTurn == 1) {
+          Player1Score = Player1Score + 1;
+        }
+        if (PlayerTurn == 2) {
+          Player2Score = Player2Score + 1;
+        }
       }
-      //cardtrack = 0;
     } else if (card1chosen != card2chosen) {
       waitingtoFlip = true;
     }
@@ -191,9 +196,13 @@ void manageCards(int i) {
         clicked[card1number] = false;
         clicked[card2number] = false;
         waitingtoFlip = false;
+       if (PlayerTurn == 1) {
+          PlayerTurn = 2;
+        } else if (PlayerTurn == 2) {
+          PlayerTurn = 1;
+        }
        }
       }
-      println (currentDelay);
     }
 
 void CardClicked(int i) {
@@ -210,14 +219,14 @@ void CardClicked(int i) {
       card2number = i;
       card2chosen = cardtype[i];
      }
-     if (cardtrack == 1) {
-      println ("card1number: " + card1number);
-      println ("card1chosen: " + card1chosen);
-     }
-     if (cardtrack == 2) {
-      println ("card2number: " + card2number);
-      println ("card2chosen: " + card2chosen);
-     }
-     println (cardtrack);
+     //if (cardtrack == 1) {
+      //println ("card1number: " + card1number);
+      //println ("card1chosen: " + card1chosen);
+    // }
+     //if (cardtrack == 2) {
+     // println ("card2number: " + card2number);
+     // println ("card2chosen: " + card2chosen);
+    // }
+     //println (cardtrack);
   }
 }
