@@ -84,6 +84,7 @@ void CardSetup() {
   while (i < cardnums) {
     if (cardcorrect[i] == false) {
       manageCards(i);
+      println(i);
     }
    i++;
   }
@@ -166,28 +167,7 @@ void manageCards(int i) {
    //Card Check to see if match
    if (cardtrack == 2) {
      if (card1chosen == card2chosen) {
-       waitingtoFlip = true;
-      // if (currentDelay > 0) {
-      //  currentDelay = currentDelay - frameSpeed;
-      //  println (currentDelay);
-      // }
-      //if (currentDelay <= 0) {
-      //  cardcorrect[card1number] = true;
-      //  cardcorrect[card2number] = true;
-      //  cardtrack = 0;
-      //  waitingtoFlip = false;
-      //  currentDelay = 2400;
-      //  if (PlayerTurn == 1) {
-      //    Player1Score = Player1Score + 1;
-      //    cardscorrect = cardscorrect + 2;
-      //  }
-      //  if (PlayerTurn == 2) {
-      //    Player2Score = Player2Score + 1;
-      //    cardscorrect = cardscorrect + 2;
-      //  }
-       //println (cardscorrect);
-       //println (currentDelay);
-      //}
+      waitingtoFlip = true;
     } else if (card1chosen != card2chosen) {
       waitingtoFlip = true;
     }
@@ -197,14 +177,14 @@ void manageCards(int i) {
        if (card1chosen == card2chosen) {
         if (currentDelay > 0) {
         currentDelay = currentDelay - frameSpeed;
-        println (currentDelay);
+        //println (currentDelay);
        }
       if (currentDelay <= 0) {
         cardcorrect[card1number] = true;
         cardcorrect[card2number] = true;
         cardtrack = 0;
         waitingtoFlip = false;
-        currentDelay = 2400;
+        //currentDelay = 2400;
         if (PlayerTurn == 1) {
           Player1Score = Player1Score + 1;
           cardscorrect = cardscorrect + 2;
