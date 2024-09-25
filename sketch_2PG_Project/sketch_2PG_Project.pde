@@ -27,6 +27,7 @@ float currentDelay;
 boolean waitingtoFlip;
 boolean cardanimation;
 int cardscorrect;
+int matchedCount;
 float animationSpeed;
 float frameSpeed;
 int[] cardtype;
@@ -47,7 +48,7 @@ void setup() {
   mode = INTRO;
 
   //Initialize Fonts
-  KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
 
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -56,6 +57,7 @@ void setup() {
 
   //Game
   cardnums = 36;
+  matchedCount = 0;
   cardX = new float[cardnums];
   cardY = new float[cardnums];
   cardD = new float[cardnums];
