@@ -36,7 +36,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (141, 179, 211);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("BLUE STARTS", width/2, height/2);
       
@@ -48,7 +48,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (237, 183, 117);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
       
@@ -68,13 +68,13 @@ void PlayerScoreTracking() {
   //Player1 Score
   noStroke();
   fill (141, 179, 211);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 270, 35);
 
   //Player2 Score
   fill (237, 183, 117);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player2Score, 330, 35);
 }
@@ -84,7 +84,7 @@ void CardSetup() {
   while (i < cardnums) {
     if (cardcorrect[i] == false) {
       manageCards(i);
-      println(i);
+      manageCardAnimation(i);
     }
    i++;
   }
@@ -131,6 +131,9 @@ void manageCards(int i) {
     fill (250, 135, 129);
     }
   }
+}
+
+void manageCardAnimation(int i) {
   
   //Cards
   rect(cardX[i], cardY[i], cardD[i], 50);
@@ -177,11 +180,14 @@ void manageCards(int i) {
        if (card1chosen == card2chosen) {
         if (currentDelay > 0) {
         currentDelay = currentDelay - frameSpeed;
-        //println (currentDelay);
+        println (currentDelay);
        }
       if (currentDelay <= 0) {
+        cardanimation = false;
         cardcorrect[card1number] = true;
         cardcorrect[card2number] = true;
+        clicked[card1number] = false;
+        clicked[card1number] = false;
         cardtrack = 0;
         waitingtoFlip = false;
         //currentDelay = 2400;
@@ -215,8 +221,10 @@ void manageCards(int i) {
      }
     }
    }
+   
 
 void CardClicked(int i) {
+  if (cardtrack < 2) {
   if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
       cardanimation = true;
       cardClicked = i;
@@ -240,6 +248,7 @@ void CardClicked(int i) {
      //}
      //println (cardtrack);
   }
+ }
 }
 
 void GameEnds() {
