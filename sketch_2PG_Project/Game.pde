@@ -234,7 +234,7 @@ void manageCardAnimation(int i) {
  
 
 void CardClicked(int i) {
-  if (cardtrack < 2 && cardanimation == false) {
+  if (cardtrack < 2 && cardanimation == false && currentDelay == 2400) {
     if (mouseX > cardX[i] & mouseX < cardX[i]+40 & mouseY > cardY[i] & mouseY < cardY[i]+50) {
       cardanimation = true;
       cardClicked = i;
@@ -266,3 +266,4 @@ void GameEnds() {
     mode = GAMEOVER;
   }
 }
+
