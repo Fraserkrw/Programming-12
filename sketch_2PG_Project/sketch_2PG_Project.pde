@@ -24,6 +24,9 @@ int card2chosen;
 int card1number;
 int card2number;
 float currentDelay;
+int delayStatus;
+final int delayDone = 1;
+final int delayReset = 0;
 boolean waitingtoFlip;
 boolean cardanimation;
 int cardscorrect;
@@ -48,7 +51,7 @@ void setup() {
   mode = INTRO;
 
   //Initialize Fonts
-  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  KidsMagazine = createFont("Kids Magazine.ttf", 100);
 
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -69,6 +72,7 @@ void setup() {
   cards = new ArrayList();
   cardanimation = false;
   currentDelay = 2400;
+  delayStatus = delayReset;
   waitingtoFlip = false;
   animationSpeed = 0.1;
   frameSpeed = 1;
@@ -109,6 +113,7 @@ void setup() {
 }
 
   void draw() {
+    println(frameRate, animationSpeed, cardanimation, cardtrack, currentDelay, card1chosen);
     if (mode == INTRO) {
       Intro();
     } else if (mode == GAME) {
