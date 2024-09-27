@@ -23,12 +23,19 @@ void setup() {
   
   myButtons = new Button[numsButtons];
   
-  myButtons[0] = new Button("BLUE", 200, 200, 200, 200, blue, white);
+  myButtons[0] = new Button("BLUE", 200, 200, 200, 150, blue, white);
+  myButtons[1] = new Button("GREEN", 200, 400, 200, 150, green, white);
+  myButtons[2] = new Button("BLACK", 550, 300, 400, 350, black, white);
+  myButtons[3] = new Button("PINK", width/2, 650, 600, 200, pink, white);
 }
 
 void draw() {
   click();
   
-  myButtons[0].show();
-  myButtons[0].clicked();
+  int i = 0;
+  while (i < numsButtons) {
+  myButtons[i].show();
+  myButtons[i].clicked();
+  i++;
+  }
 }
