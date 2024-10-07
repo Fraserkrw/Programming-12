@@ -2,23 +2,44 @@
 //October 4th, 2024
 //1-4
 
-Mover[] myMovers;
-int numsMovers = 50;
+ArrayList<Mover> myMovers;
 
 void setup() {
   size (800, 800);
-  myMovers = new Mover[numsMovers];
-  
-  for(int i = 0; i < numsMovers; i++) {
-    myMovers[i] = new Mover();
-  }
+  myMovers = new ArrayList();
 }
 
 void draw() {
   background (#067EC6);
-  for (int i = 0; i < numsMovers; i++) {
-    myMovers[i].showBody();
-    myMovers[i].act();
-    myMovers[i].showConnections();
+  for (int i = 0; i < myMovers.size(); i++) {
+    Mover m = myMovers.get(i);
+    m.showBody();
+    m.act();
+    m.showConnections();
+    checkforDeletion(i);
+   }
+  }
+
+
+void keyPressed() {
+  if (keyCode == RIGHT) {
+    myMovers.add(new Mover());
+  }
+  if (keyCode == LEFT) {
+    if (myMovers.size() > 0) {
+    myMovers.remove(0);
+    }
   }
 }
+  
+  void mouseReleased() {
+   myMovers.add(new Mover(mouseX, mouseY));
+  }
+  
+  void checkforDeletion(int i) {
+   Mover others = myMovers.get(i);
+   if (dist(mouseX, mouseY, others.location.x, others.location.y) < others.size/2 && keyPressed && (key == 'D' || key == 'd')) {
+     myMovers.remove(i);
+     i--;
+   }
+ }
