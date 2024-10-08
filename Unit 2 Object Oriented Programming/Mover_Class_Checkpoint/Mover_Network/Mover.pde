@@ -38,7 +38,7 @@ class Mover {
       if (dist <= 200) {
         float a = map (dist, 0, 200, 255, 0);
         stroke (255-a, a);
-        strokeWeight (2);
+        strokeWeight (2+(a/100));
         line (location.x, location.y, other.location.x, other.location.y);
       }
     }
