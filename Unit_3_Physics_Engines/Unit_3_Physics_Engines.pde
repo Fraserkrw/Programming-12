@@ -11,14 +11,22 @@ color green  = color(74, 163, 57);
 color red    = color(224, 80, 61);
 color yellow = color(242, 215, 16);
 
+
 //Cloud Variables
 int cloud1x = 50;
 int cloud1y = 100;
 int cloud2x = width-100;
 int cloud2y = 100;
 
+//Buttons
+Button[] GravityOnButton, GravityOffButton;
+boolean mouseReleased;
+boolean wasPressed;
+boolean gravity;
+
 //assets
 PImage redBird;
+PImage angryBird;
 
 FPoly leftPlatform; 
 FPoly bucketPlatform;
@@ -29,9 +37,20 @@ FWorld world;
 void setup() {
   //make window
   fullScreen();
+  rectMode(CENTER);
+  textAlign(CENTER);
   
   //load resources
   redBird = loadImage("red-bird.png");
+  angryBird = loadImage("Angry Birds.png");
+  
+  //load buttons
+  gravity = true;
+  GravityOnButton = new Button[1];
+  GravityOffButton = new Button[1];
+  
+  GravityOnButton[0] = new Button("GravityOn", 150, 700, 100, 100, red, yellow);
+  GravityOffButton[0] = new Button(1250, 700, 100, 100, red, yellow, "GravityOff");
 
   //initialise world
   makeWorld();
@@ -119,6 +138,7 @@ void makeBucketPlatform() {
 void draw() {
   println("x: " + mouseX + " y: " + mouseY);
   background(blue);
+  click();
 
   if (frameCount % 60 == 0) {  //Every 20 frames ...
     makeCircle();
@@ -130,6 +150,8 @@ void draw() {
   makeCloud2();
   world.draw();  //ask box2D to convert this world to processing screen coordinates and draw
   makeCloud1();
+  initializeButtons();
+  checkforGravity();
 }
 
 
@@ -183,12 +205,13 @@ void makeBox() {
   box.setStroke(0);
   box.setStrokeWeight(2);
   box.setFillColor(green);
-  box.attachImage("
+  angryBird.resize(50, 50);
+  box.attachImage(angryBird);
 
   //set physical properties
   box.setDensity(0.2);
   box.setFriction(1);
-  box.setRestitution(0.25);
+  box.setRestitution(2);
   world.add(box);
 }
 
@@ -210,6 +233,7 @@ void makeBird() {
 
 void makeCloud1() {
   noStroke();
+  fill(255);
   circle(cloud1x, cloud1y, 50);
   circle(cloud1x+25, cloud1y-25, 50);
   circle(cloud1x, cloud1y+25, 50);
@@ -227,6 +251,7 @@ void makeCloud1() {
 
 void makeCloud2() {
   noStroke();
+  fill (255);
   circle(cloud2x, cloud2y, 50);
   circle(cloud2x+25, cloud2y-25, 50);
   circle(cloud2x, cloud2y+25, 50);
@@ -239,5 +264,24 @@ void makeCloud2() {
   cloud2x = cloud2x - 1;
   if (cloud2x < 0) {
     cloud2x = width+100;
+  }
+}
+
+void initializeButtons() {
+  int i = 0;
+  while (i < 1) {
+  GravityOnButton[i].showButton1();
+  GravityOnButton[i].clicked();
+  GravityOffButton[i].showButton2();
+  GravityOffButton[i].clicked();
+  i++;
+  }
+}
+
+void checkforGravity() {
+  if (gravity == true) {
+    world.setGravity(0, 900);
+  } else {
+    world.setGravity(0, 0);
   }
 }
