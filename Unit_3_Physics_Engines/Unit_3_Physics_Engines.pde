@@ -19,10 +19,11 @@ int cloud2x = width-100;
 int cloud2y = 100;
 
 //Buttons
-Button[] GravityOnButton, GravityOffButton;
+Button[] GravityButton, FBodiesButton;
 boolean mouseReleased;
 boolean wasPressed;
 boolean gravity;
+boolean fbodies;
 
 //assets
 PImage redBird;
@@ -46,11 +47,13 @@ void setup() {
   
   //load buttons
   gravity = true;
-  GravityOnButton = new Button[1];
-  GravityOffButton = new Button[1];
+  fbodies = true;
+  GravityButton = new Button[1];
+  FBodiesButton = new Button[1];
   
-  GravityOnButton[0] = new Button("GravityOn", 150, 700, 100, 100, red, yellow);
-  GravityOffButton[0] = new Button(1250, 700, 100, 100, red, yellow, "GravityOff");
+  GravityButton[0] = new Button("Gravity", 150, 700, 100, 100, red, yellow);
+  FBodiesButton[0] = new Button(1250, 700, 100, 100, red, yellow, "FBodies");
+  
 
   //initialise world
   makeWorld();
@@ -140,11 +143,13 @@ void draw() {
   background(blue);
   click();
 
-  if (frameCount % 60 == 0) {  //Every 20 frames ...
+  if (frameCount % 60 == 0) { //Every 20 frames ...
+    if (fbodies == true) {
     makeCircle();
     makeBlob();
     makeBox();
     makeBird();
+    }
   }
   world.step();  //get box2D to calculate all the forces and new positions
   makeCloud2();
@@ -270,10 +275,10 @@ void makeCloud2() {
 void initializeButtons() {
   int i = 0;
   while (i < 1) {
-  GravityOnButton[i].showButton1();
-  GravityOnButton[i].clicked();
-  GravityOffButton[i].showButton2();
-  GravityOffButton[i].clicked();
+  GravityButton[i].showButton1();
+  GravityButton[i].clicked();
+  FBodiesButton[i].showButton2();
+  FBodiesButton[i].clicked();
   i++;
   }
 }
