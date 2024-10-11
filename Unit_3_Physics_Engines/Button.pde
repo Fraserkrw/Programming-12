@@ -98,8 +98,14 @@ class Button {
   void clicked() {
     if (clicked == true) {
       if (buttonType == 1) {
-      gravity = true;
+      gravity = !gravity;
     }
+    if (buttonType == 2) {
+      fbodies = !fbodies;
+    }
+   }
+  }
+ }
     if (buttonType == 2) {
       gravity = false;
     }
