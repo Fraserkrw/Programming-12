@@ -5,12 +5,12 @@ void Gameover() {
     background (141, 179, 211); //blue
     fill (0);
     textSize (45);
-    text("PLAYER 1 WINS!", width/2, height/4);
+    text("BLUE WINS!", width/2, height/4);
   } else if (Player1Score < Player2Score) {
     background (237, 183, 117); //red
     fill (0);
     textSize (45);
-    text("PLAYER 2 WINS!", width/2, height/4);
+    text("RED WINS!", width/2, height/4);
   } else if (Player1Score == Player2Score) {
     background (229, 97, 247); //purple
     fill (0);
@@ -36,7 +36,7 @@ void Gameover() {
 }
 
 void gameoverClicks() {
-  if (mouseX > 250 && mouseX < 350 && mouseY > height/2 && mouseY < (height/2)+50) {
+  if (mouseX > 200 && mouseX < 400 && mouseY > height/2 && mouseY < (height/2)+100) {
     PlayerTurn = (int) random(1, 3);
     Player1Score = 0;
     Player2Score = 0;
@@ -53,7 +53,7 @@ void gameoverClicks() {
    }
     mode = INTRO;
   }
-  if (mouseX > 250 && mouseX < 350 && mouseY > 3*height/4 && mouseY < (3*height/4)+50) {
+  if (mouseX > 200 && mouseX < 400 && mouseY > 3*height/4 && mouseY < (3*height/4)+100) {
     exit();
   }
 }
