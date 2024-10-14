@@ -46,7 +46,7 @@ PFont KidsMagazine;
 void setup() {
   size(600, 800);
   textAlign(CENTER);
-  mode = GAMEOVER;
+  mode = INTRO;
 
   //Initialize Fonts
   //KidsMagazine = createFont("Kids Magazine.ttf", 100);
