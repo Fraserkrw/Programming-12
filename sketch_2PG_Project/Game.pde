@@ -36,7 +36,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (141, 179, 211);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("BLUE STARTS", width/2, height/2);
 
@@ -49,7 +49,7 @@ void PlayerTurnNotification() {
       fill (95, 95, 95);
       rect (90, 330, 420, 100);
       fill (237, 183, 117);
-      textFont (KidsMagazine);
+      //textFont (KidsMagazine);
       textSize(40);
       text ("RED STARTS", width/2, height/2);
 
@@ -69,13 +69,13 @@ void PlayerScoreTracking() {
   //Player1 Score
   noStroke();
   fill (141, 179, 211);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player1Score, 270, 35);
 
   //Player2 Score
   fill (237, 183, 117);
-  textFont (KidsMagazine);
+  //textFont (KidsMagazine);
   textSize (20);
   text (Player2Score, 330, 35);
 }
