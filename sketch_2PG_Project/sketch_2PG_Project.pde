@@ -5,8 +5,7 @@
 int mode;
 final int INTRO = 1;
 final int GAME = 2;
-final int PAUSE = 3;
-final int GAMEOVER = 4;
+final int GAMEOVER = 3;
 
 //Game
 int PlayerTurn;
@@ -30,7 +29,6 @@ final int delayReset = 0;
 boolean waitingtoFlip;
 boolean cardanimation;
 int cardscorrect;
-int matchedCount;
 float animationSpeed;
 float frameSpeed;
 int[] cardtype;
@@ -48,10 +46,10 @@ PFont KidsMagazine;
 void setup() {
   size(600, 800);
   textAlign(CENTER);
-  mode = INTRO;
+  mode = GAMEOVER;
 
   //Initialize Fonts
-  KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
 
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -60,7 +58,6 @@ void setup() {
 
   //Game
   cardnums = 36;
-  matchedCount = 0;
   cardX = new float[cardnums];
   cardY = new float[cardnums];
   cardD = new float[cardnums];
@@ -113,13 +110,10 @@ void setup() {
 }
 
   void draw() {
-    println(frameRate, animationSpeed, cardanimation, cardtrack, currentDelay, card1chosen);
     if (mode == INTRO) {
       Intro();
     } else if (mode == GAME) {
       Game();
-    } else if (mode == PAUSE) {
-      Pause();
     } else if (mode == GAMEOVER) {
       Gameover();
     } else {
