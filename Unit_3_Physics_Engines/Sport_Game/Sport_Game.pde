@@ -29,17 +29,32 @@ final int Red = 2;
 int Player1Score;
 int Player2Score;
 
+//Boundary
+FPoly boundary;
+
 //Key Variables
-boolean rightkey, leftkey;
+boolean rightkey, leftkey, upkey, downkey, spacekey;
+
+//Ball Variables
+FCircle ball;
+float chargeX;
+float velocityX, velocityY;
+boolean hit;
+float prevX, prevY;
 
 //Arrow Varialbes
 float arrowX1, arrowY1, arrowX2, arrowY2, arrowX3, arrowY3, arrowX4, arrowY4, arrowX5, arrowY5, angle;
+boolean arrowActive;
+
+//Levels
+int level;
 
 void setup() {
   size (800, 800);
   textAlign(CENTER);
   rectMode(CENTER);
   mode = INTRO;
+  level = 1;
   
   //Initialize world
   makeWorld();
@@ -47,6 +62,10 @@ void setup() {
   //Key Variables
   rightkey = false;
   leftkey = false;
+  upkey = false;
+  downkey = false;
+  spacekey = false;
+  arrowActive = true;
   
   //Player
   PlayerTurn = (int) random(1, 3);
@@ -55,6 +74,10 @@ void setup() {
   
   //Arrow Variables
   angle = -PI/2;
+  
+  //Ball Variables
+  chargeX = 0;
+  hit = false;
   
   //Initialize Fonts
   //KidsMagazine = createFont("Kids Magazine.ttf", 100);
@@ -80,4 +103,5 @@ void makeWorld() {
   Fisica.init(this);
   world = new FWorld();
   world.setEdges();
+  world.setGravity(0, 0);
 }
