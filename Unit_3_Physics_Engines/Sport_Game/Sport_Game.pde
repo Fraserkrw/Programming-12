@@ -7,7 +7,6 @@ import fisica.*;
 int mode;
 final int INTRO = 1;
 final int GAME = 2;
-final int PAUSE = 3;
 final int GAMEOVER = 4;
 
 FWorld world;
@@ -39,11 +38,12 @@ boolean rightkey, leftkey, upkey, downkey, spacekey;
 FCircle ball;
 float chargeX;
 float velocityX, velocityY;
-boolean hit;
+boolean moving;
 float prevX, prevY;
 
 //Goal
 FCircle goal;
+boolean hit;
 
 //Arrow Varialbes
 float arrowX1, arrowY1, arrowX2, arrowY2, arrowX3, arrowY3, arrowX4, arrowY4, arrowX5, arrowY5, angle;
@@ -51,6 +51,8 @@ boolean arrowActive;
 
 //Levels
 int level;
+boolean levelchange;
+int turnsCompleted;
 
 void setup() {
   size (800, 800);
@@ -78,12 +80,14 @@ void setup() {
   //Arrow Variables
   angle = -PI/2;
   
-  //Ball Variables
+  //Game Variables
   chargeX = 0;
+  moving = false;
   hit = false;
+  levelchange = false;
   
   //Initialize Fonts
-  //KidsMagazine = createFont("Kids Magazine.ttf", 100);
+  KidsMagazine = createFont("Kids Magazine.ttf", 100);
   
   //Add Boundaries
   BoxBoundarySetup();
