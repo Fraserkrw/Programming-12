@@ -3,12 +3,15 @@ void Game() {
   handlePlayerInput();
   world.step();
   world.draw();
+  scoreTracking();
   trackVelocity();
   if (arrowActive == true) {
   addArrow();
   }
   rectCharge();
+  if (checkforBallStopped() == true) {
   ballReset();
+  }
 }
 
 void gameClicks() {
@@ -43,6 +46,7 @@ void addBoundaryWalls() {
   leftWall.setPosition(200, 400);
   leftWall.setStatic(true);
   leftWall.setFill(0, 0, 0, 0);  
+  leftWall.setGrabbable(false);
   world.add(leftWall);
 
   // Add right wall
@@ -50,6 +54,7 @@ void addBoundaryWalls() {
   rightWall.setPosition(600, 400);
   rightWall.setStatic(true);
   rightWall.setFill(0, 0, 0, 0);
+  rightWall.setGrabbable(false);
   world.add(rightWall);
 
   // Add top wall
@@ -57,6 +62,7 @@ void addBoundaryWalls() {
   topWall.setPosition(400, 50);
   topWall.setStatic(true);
   topWall.setFill(0, 0, 0, 0);
+  topWall.setGrabbable(false);
   world.add(topWall);
 
   // Add bottom wall
@@ -64,25 +70,30 @@ void addBoundaryWalls() {
   bottomWall.setPosition(400, 750);
   bottomWall.setStatic(true);
   bottomWall.setFill(0, 0, 0, 0);
+  bottomWall.setGrabbable(false);
   world.add(bottomWall);
 }
 
 void addLevelObstacles() {
-  
+  //Level 1
+  if (level == 1) {
+    level1();
+  }
 }
 
 void addBall() {
-  ball = new FCircle(50);
+  ball = new FCircle(40);
   ball.setPosition(width/2, 650);
   
   //set visuals
   ball.setStroke(0);
-  ball.setStrokeWeight(5);
+  ball.setStrokeWeight(8);
   ball.setFillColor(white);
   
   //set physical properties
   ball.setStatic(false);
   ball.setRestitution(0.5);
+  ball.setGrabbable(false);
   
   //add to world
   world.add(ball);
@@ -109,6 +120,62 @@ void addArrow() {
   line(arrowX1, arrowY1, arrowX2, arrowY2);
   triangle(arrowX4, arrowY4, arrowX5, arrowY5, arrowX3, arrowY3);
   popMatrix();
+}
+
+void addGoal() {
+  goal = new FCircle(40);
+  goal.setPosition(width/2, 100);
+  
+  //set visuals
+  goal.setStroke(0);
+  goal.setStrokeWeight(5);
+  goal.setFillColor(black);
+  
+  //set properties
+  goal.setStatic(true);
+  goal.setGrabbable(false);
+  goal.setSensor(true);
+  
+  world.add(goal);
+}
+
+boolean hitGoal() {
+  ArrayList<FContact> ballcontactList = ball.getContacts();
+  for (int i = 0; i < ballcontactList.size(); i++) {
+    FContact ballContacts = ballcontactList.get(i);
+    if (ballContacts.contains(goal)) {
+      println("hit");
+      return true;
+    }
+  }
+  return false;
+}
+
+void scoreTracking() {
+  scoreboard();
+  if (PlayerTurn == blue && hitGoal()) {
+    Player1Score++;
+    ballReset(); 
+  }
+  if (PlayerTurn == red && hitGoal()) {
+    Player2Score++;
+    ballReset();
+  }
+}
+
+void scoreboard() {
+  //Scoreboard
+  stroke(0);
+  strokeWeight(2);
+  fill (101, 101, 101);
+  rect(width/2, 25, 70, 25);
+  fill(blue);
+  textSize(25);
+  text(Player1Score, width/2-20, 33);
+  line (width/2-5, 25, width/2+5, 25);
+  fill(red);
+  textSize(25);
+  text(Player2Score, width/2+20, 33);
 }
 
 void keyPressed() {
@@ -177,14 +244,13 @@ void keyPressed() {
  }
  
  boolean checkforBallStopped() {
-   if (abs(velocityX) < 0.01 && abs(velocityY) < 0.01 && hit == true) {
+   if (abs(velocityX) < 0.02 && abs(velocityY) < 0.02 && hit == true) {
      return true;
    }
    return false;
  }
  
  void ballReset() {
-   if (checkforBallStopped() == true) {
      ball.setPosition(width/2, 650);
      if (PlayerTurn == 1) {
        PlayerTurn = 2;
@@ -196,7 +262,6 @@ void keyPressed() {
      chargeX = 0;
      arrowActive = true;
      hit = false;
-   }
  }
  
  void trackVelocity() {
@@ -209,4 +274,12 @@ void keyPressed() {
   prevX = ball.getX();
   prevY = ball.getY();
   }
+ }
+ 
+ void level1() {
+   FBox obstacle1 = new FBox(100, 100);
+   obstacle1.setPosition(200, 400);
+   obstacle1.setStatic(true);
+   obstacle1.setFill(0, 0, 0, 0);  
+   world.add(obstacle1);
  }
