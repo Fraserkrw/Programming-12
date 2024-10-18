@@ -3,13 +3,19 @@ void Game() {
   handlePlayerInput();
   world.step();
   world.draw();
+  if (levelchange == true) {
+    addLevelObstacles();
+    levelchange = false;
+  }
   scoreTracking();
   trackVelocity();
+  hitGoal();
   if (arrowActive == true) {
   addArrow();
   }
   rectCharge();
   if (checkforBallStopped() == true) {
+  turnsCompleted++;
   ballReset();
   }
 }
@@ -79,6 +85,10 @@ void addLevelObstacles() {
   if (level == 1) {
     level1();
   }
+  //Level2
+  if (level == 2) {
+    level2();
+  }
 }
 
 void addBall() {
@@ -144,7 +154,6 @@ boolean hitGoal() {
   for (int i = 0; i < ballcontactList.size(); i++) {
     FContact ballContacts = ballcontactList.get(i);
     if (ballContacts.contains(goal)) {
-      println("hit");
       return true;
     }
   }
@@ -153,13 +162,20 @@ boolean hitGoal() {
 
 void scoreTracking() {
   scoreboard();
-  if (PlayerTurn == blue && hitGoal()) {
+  if (PlayerTurn == Blue && hitGoal()) {
     Player1Score++;
-    ballReset(); 
+    ballReset();
+    turnsCompleted++;
   }
-  if (PlayerTurn == red && hitGoal()) {
+  if (PlayerTurn == Red && hitGoal()) {
     Player2Score++;
     ballReset();
+    turnsCompleted++;
+  }
+  if (turnsCompleted == 2) {
+    level++;
+    turnsCompleted = 0;
+    levelchange = true;
   }
 }
 
@@ -170,11 +186,11 @@ void scoreboard() {
   fill (101, 101, 101);
   rect(width/2, 25, 70, 25);
   fill(blue);
-  textSize(25);
+  textSize(15);
   text(Player1Score, width/2-20, 33);
   line (width/2-5, 25, width/2+5, 25);
   fill(red);
-  textSize(25);
+  textSize(15);
   text(Player2Score, width/2+20, 33);
 }
 
@@ -218,7 +234,7 @@ void keyPressed() {
      ball.setVelocity(velocityX, velocityY);
      chargeX = 0;
      arrowActive = false;
-     hit = true;
+     moving = true;
      }
    }
  }
@@ -232,6 +248,7 @@ void keyPressed() {
  }
  
  void rectCharge() {
+   if (moving == false) {
    if (upkey == true | chargeX > 0) {
    stroke(0);
    strokeWeight(5);
@@ -241,10 +258,11 @@ void keyPressed() {
    fill(255, 255, 0);
    quad(width/2-40, 693, width/2-40, 707, (width/2-40)+chargeX, 707, (width/2-40)+chargeX, 693);
    }
+  }
  }
  
  boolean checkforBallStopped() {
-   if (abs(velocityX) < 0.02 && abs(velocityY) < 0.02 && hit == true) {
+   if (abs(velocityX) < 0.02 && abs(velocityY) < 0.02 && moving == true) {
      return true;
    }
    return false;
@@ -259,13 +277,15 @@ void keyPressed() {
      }
      velocityX = 0;
      velocityY = 0;
+     ball.setVelocity(0, 0);
      chargeX = 0;
      arrowActive = true;
+     moving = false;
      hit = false;
  }
  
  void trackVelocity() {
-  if (hit == true) {
+  if (moving == true) {
   // Update velocities based on the change in position
   velocityX = ball.getX() - prevX;
   velocityY = ball.getY() - prevY;
@@ -277,9 +297,25 @@ void keyPressed() {
  }
  
  void level1() {
-   FBox obstacle1 = new FBox(100, 100);
-   obstacle1.setPosition(200, 400);
+   FBox obstacle1 = new FBox(80, 80);
+   obstacle1.setRotation(PI/4);
+   obstacle1.setPosition(width/2, 400);
    obstacle1.setStatic(true);
-   obstacle1.setFill(0, 0, 0, 0);  
+   obstacle1.setFill(0);  
    world.add(obstacle1);
+ }
+ 
+ void level2() {
+   FBox obstacle2 = new FBox(50, 50);
+   FBox obstacle3 = new FBox(50, 50);
+   obstacle2.setRotation(PI/4);
+   obstacle2.setPosition(300, 400);
+   obstacle2.setStatic(true);
+   obstacle2.setFill(0);  
+   obstacle3.setRotation(PI/4);
+   obstacle3.setPosition(500, 400);
+   obstacle3.setStatic(true);
+   obstacle3.setFill(0);  
+   world.add(obstacle2);
+   world.add(obstacle3);
  }
