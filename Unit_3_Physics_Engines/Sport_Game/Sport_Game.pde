@@ -42,6 +42,9 @@ float velocityX, velocityY;
 boolean hit;
 float prevX, prevY;
 
+//Goal
+FCircle goal;
+
 //Arrow Varialbes
 float arrowX1, arrowY1, arrowX2, arrowY2, arrowX3, arrowY3, arrowX4, arrowY4, arrowX5, arrowY5, angle;
 boolean arrowActive;
@@ -54,7 +57,7 @@ void setup() {
   textAlign(CENTER);
   rectMode(CENTER);
   mode = INTRO;
-  level = 1;
+  level = 0;
   
   //Initialize world
   makeWorld();
@@ -85,6 +88,7 @@ void setup() {
   //Add Boundaries
   BoxBoundarySetup();
   addBall();
+  addGoal();
 }
 
 void draw() {
