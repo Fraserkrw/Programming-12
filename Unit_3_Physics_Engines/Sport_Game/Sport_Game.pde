@@ -51,8 +51,15 @@ boolean arrowActive;
 
 //Levels
 int level;
+int totalLevels;
 boolean levelchange;
 int turnsCompleted;
+boolean[] deleteFromWorld;
+
+//Obstacles
+FBox obstacle1;
+FBox obstacle2;
+FBox obstacle3;
 
 void setup() {
   size (800, 800);
@@ -63,6 +70,14 @@ void setup() {
   
   //Initialize world
   makeWorld();
+  
+  //Instantiate boolean
+  totalLevels = 5;
+  deleteFromWorld = new boolean[totalLevels];
+  
+  for (int i = 0; i < totalLevels; i++) {
+    deleteFromWorld[i] = false;
+  }
   
   //Key Variables
   rightkey = false;
