@@ -4,6 +4,9 @@ void Game() {
   world.step();
   world.draw();
   if (levelchange == true) {
+    if (level >= 2) {
+      deleteFromWorld[level-1] = true;
+    }
     addLevelObstacles();
     levelchange = false;
   }
@@ -83,11 +86,23 @@ void addBoundaryWalls() {
 void addLevelObstacles() {
   //Level 1
   if (level == 1) {
+    if (deleteFromWorld[1] == false) {
     level1();
+    }
   }
+  if (deleteFromWorld[1] == true) {
+    obstacle1.setPosition(-2000, -2000);
+  }
+  
   //Level2
   if (level == 2) {
+    if (deleteFromWorld[2] == false) {
     level2();
+    }
+  }
+  if (deleteFromWorld[2] == true) {
+    obstacle2.setPosition(-2000, -2000);
+    obstacle3.setPosition(-2000, -2000);
   }
 }
 
@@ -297,7 +312,7 @@ void keyPressed() {
  }
  
  void level1() {
-   FBox obstacle1 = new FBox(80, 80);
+   obstacle1 = new FBox(80, 80);
    obstacle1.setRotation(PI/4);
    obstacle1.setPosition(width/2, 400);
    obstacle1.setStatic(true);
@@ -306,8 +321,8 @@ void keyPressed() {
  }
  
  void level2() {
-   FBox obstacle2 = new FBox(50, 50);
-   FBox obstacle3 = new FBox(50, 50);
+   obstacle2 = new FBox(75, 75);
+   obstacle3 = new FBox(75, 75);
    obstacle2.setRotation(PI/4);
    obstacle2.setPosition(300, 400);
    obstacle2.setStatic(true);
