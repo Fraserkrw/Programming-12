@@ -104,10 +104,21 @@ void addLevelObstacles() {
     obstacle2.setPosition(-2000, -2000);
     obstacle3.setPosition(-2000, -2000);
   }
+  
+  //Level 3
+  if (level == 3) {
+    if (deleteFromWorld[3] == false) {
+    level3();
+    }
+  }
+  if (deleteFromWorld[3] == true) {
+    obstacle4.setPosition(-2000, -2000);
+    obstacle5.setPosition(-2000, -2000);
+  }
 }
 
 void addBall() {
-  ball = new FCircle(40);
+  ball = new FCircle(ballD);
   ball.setPosition(width/2, 650);
   
   //set visuals
@@ -215,6 +226,11 @@ void keyPressed() {
     if (keyCode == UP) upkey = true;
     if (keyCode == DOWN) downkey = true;
     if (keyCode == 32) spacekey = true; 
+    
+    //Cheat
+    if (key == 'P' || key == 'p') {
+      ball.setPosition(width/2, 100);
+    }
   }
  
  void keyReleased()   {
@@ -277,7 +293,7 @@ void keyPressed() {
  }
  
  boolean checkforBallStopped() {
-   if (abs(velocityX) < 0.02 && abs(velocityY) < 0.02 && moving == true) {
+   if (abs(velocityX) < 0.05 && abs(velocityY) < 0.05 && moving == true) {
      return true;
    }
    return false;
@@ -293,7 +309,9 @@ void keyPressed() {
      velocityX = 0;
      velocityY = 0;
      ball.setVelocity(0, 0);
+     ballD = 40;
      chargeX = 0;
+     angle = -PI/2;
      arrowActive = true;
      moving = false;
      hit = false;
@@ -316,7 +334,8 @@ void keyPressed() {
    obstacle1.setRotation(PI/4);
    obstacle1.setPosition(width/2, 400);
    obstacle1.setStatic(true);
-   obstacle1.setFill(0);  
+   obstacle1.setFill(0); 
+   obstacle1.setGrabbable(false);
    world.add(obstacle1);
  }
  
@@ -331,6 +350,38 @@ void keyPressed() {
    obstacle3.setPosition(500, 400);
    obstacle3.setStatic(true);
    obstacle3.setFill(0);  
+   obstacle3.setGrabbable(false);
+   obstacle2.setGrabbable(false);
    world.add(obstacle2);
    world.add(obstacle3);
+ }
+ 
+ void level3() {
+   obstacle4 = new FBox (75, 75);
+   obstacle5 = new FBox (75, 75);
+   obstacle4.setRotation(PI/4);
+   obstacle5.setRotation(PI/4);
+   obstacle4.setPosition(width/2, 500);
+   obstacle5.setPosition(width/2, 250);
+   obstacle4.setFill(black);
+   obstacle5.setFill(black);
+   obstacle4.setStatic(true);
+   obstacle5.setStatic(true);
+   obstacle4.setGrabbable(false);
+   obstacle5.setGrabbable(false);
+   world.add(obstacle4);
+   world.add(obstacle5);
+ }
+ 
+ void level4() {
+   obstacle6 = new FCircle(25);
+   obstacle6.setPosition(width/2, 400);
+   obstacle6.setFill(black);
+   obstacle6.setGrabbable(false);
+   obstacle6.setStatic(true);
+   obstacle7 = new FBox(100, 10);
+   obstacle7.setPosition (width/2, 400);
+   obstacle7.setFill(black);
+   obstacle7.setGrabbable(false);
+   obstacle7.setStatic(true);
  }
