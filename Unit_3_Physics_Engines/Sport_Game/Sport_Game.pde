@@ -40,6 +40,7 @@ float chargeX;
 float velocityX, velocityY;
 boolean moving;
 float prevX, prevY;
+float ballD;
 
 //Goal
 FCircle goal;
@@ -60,6 +61,10 @@ boolean[] deleteFromWorld;
 FBox obstacle1;
 FBox obstacle2;
 FBox obstacle3;
+FBox obstacle4;
+FBox obstacle5;
+FCircle obstacle6;
+FBox obstacle7;
 
 void setup() {
   size (800, 800);
@@ -100,6 +105,7 @@ void setup() {
   moving = false;
   hit = false;
   levelchange = false;
+  ballD = 40;
   
   //Initialize Fonts
   KidsMagazine = createFont("Kids Magazine.ttf", 100);
