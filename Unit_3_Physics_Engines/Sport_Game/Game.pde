@@ -21,6 +21,7 @@ void Game() {
   turnsCompleted++;
   ballReset();
   }
+  objectRotation(); //level4 rotation
 }
 
 void gameClicks() {
@@ -114,6 +115,28 @@ void addLevelObstacles() {
   if (deleteFromWorld[3] == true) {
     obstacle4.setPosition(-2000, -2000);
     obstacle5.setPosition(-2000, -2000);
+  }
+  
+  //Level 4
+ if (level == 4) {
+    if (deleteFromWorld[4] == false) {
+    level4();
+    }
+  }
+  if (deleteFromWorld[4] == true) {
+    obstacle6.setPosition(-2000, -2000);
+    obstacle7.setPosition(-2000, -2000);
+  }
+  
+   //Level 4
+ if (level == 5) {
+    if (deleteFromWorld[5] == false) {
+    level5();
+    }
+  }
+  if (deleteFromWorld[5] == true) {
+    obstacle8.setPosition(-2000, -2000);
+    obstacle9.setPosition(-2000, -2000);
   }
 }
 
@@ -374,14 +397,63 @@ void keyPressed() {
  }
  
  void level4() {
-   obstacle6 = new FCircle(25);
+   obstacle6 = new FCircle(30);
    obstacle6.setPosition(width/2, 400);
+   obstacle6.setFriction(0);
    obstacle6.setFill(black);
    obstacle6.setGrabbable(false);
    obstacle6.setStatic(true);
-   obstacle7 = new FBox(100, 10);
-   obstacle7.setPosition (width/2, 400);
+   obstacle7 = new FPoly();
+   obstacle7.vertex(250, 395);
+   obstacle7.vertex(250, 405);
+   obstacle7.vertex(550, 405);
+   obstacle7.vertex(550, 395);
    obstacle7.setFill(black);
    obstacle7.setGrabbable(false);
-   obstacle7.setStatic(true);
+   obstacle7.setStatic(false);
+   obstacle7.setFriction(0);
+   obstacle7.setDensity(Integer.MAX_VALUE);
+   obstacle7.setRotatable(true);
+   
+   world.add(obstacle6);
+   world.add(obstacle7);
+ }
+ 
+ void level5() {
+   obstacle8 = new FPoly();
+   obstacle8.vertex(200, 395);
+   obstacle8.vertex(200, 405);
+   obstacle8.vertex(375, 405);
+   obstacle8.vertex(375, 395);
+   obstacle8.setFill(black);
+   obstacle8.setGrabbable(false);
+   obstacle8.setStatic(false);
+   obstacle8.setFriction(0);
+   obstacle8.setDensity(Integer.MAX_VALUE);
+   obstacle8.setRotatable(true);
+   
+   obstacle9 = new FPoly();
+   obstacle9.vertex(425, 395);
+   obstacle9.vertex(425, 405);
+   obstacle9.vertex(600, 405);
+   obstacle9.vertex(600, 395);
+   obstacle9.setFill(black);
+   obstacle9.setGrabbable(false);
+   obstacle9.setStatic(false);
+   obstacle9.setFriction(0);
+   obstacle9.setDensity(Integer.MAX_VALUE);
+   obstacle9.setRotatable(true);
+   
+   world.add(obstacle8);
+   world.add(obstacle9);
+ }
+ 
+ void objectRotation() {
+   if (level == 4 && obstacle7 != null) {
+   obstacle7.setAngularVelocity(5);
+   } 
+   if (level == 5 && obstacle8 != null && obstacle9 != null ) {
+   obstacle8.setAngularVelocity(-5);
+   obstacle9.setAngularVelocity(5);
+   }
  }
