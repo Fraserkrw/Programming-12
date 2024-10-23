@@ -64,7 +64,10 @@ FBox obstacle3;
 FBox obstacle4;
 FBox obstacle5;
 FCircle obstacle6;
-FBox obstacle7;
+FPoly obstacle7;
+float obstaclerotation;
+FPoly obstacle8;
+FPoly obstacle9;
 
 void setup() {
   size (800, 800);
@@ -77,7 +80,7 @@ void setup() {
   makeWorld();
   
   //Instantiate boolean
-  totalLevels = 5;
+  totalLevels = 6;
   deleteFromWorld = new boolean[totalLevels];
   
   for (int i = 0; i < totalLevels; i++) {
@@ -97,8 +100,9 @@ void setup() {
   Player1Score = 0;
   Player2Score = 0;
   
-  //Arrow Variables
-  angle = -PI/2;
+  //Angle Variables
+  angle = -PI/2; //Arrow
+  obstaclerotation = 5;
   
   //Game Variables
   chargeX = 0;
