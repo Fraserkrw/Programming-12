@@ -1,7 +1,6 @@
 void Game() {
   backgroundchange();
   handlePlayerInput();
-  world.step();
   world.draw();
   if (levelchange == true) {
     if (level >= 2) {
@@ -21,7 +20,7 @@ void Game() {
   turnsCompleted++;
   ballReset();
   }
-  objectRotation(); //level4 rotation
+  objectRotation(); //rotations
 }
 
 void gameClicks() {
@@ -128,7 +127,7 @@ void addLevelObstacles() {
     obstacle7.setPosition(-2000, -2000);
   }
   
-   //Level 4
+   //Level 5
  if (level == 5) {
     if (deleteFromWorld[5] == false) {
     level5();
@@ -137,6 +136,19 @@ void addLevelObstacles() {
   if (deleteFromWorld[5] == true) {
     obstacle8.setPosition(-2000, -2000);
     obstacle9.setPosition(-2000, -2000);
+  }
+  
+  //Level 6
+ if (level == 6) {
+    if (deleteFromWorld[6] == false) {
+    level6();
+    }
+  }
+  if (deleteFromWorld[6] == true) {
+    obstacle10.setPosition(-2000, -2000);
+    obstacle11.setPosition(-2000, -2000);
+    obstacle12.setPosition(-2000, -2000);
+    obstacle13.setPosition(-2000, -2000);
   }
 }
 
@@ -421,8 +433,8 @@ void keyPressed() {
  
  void level5() {
    obstacle8 = new FPoly();
-   obstacle8.vertex(200, 395);
-   obstacle8.vertex(200, 405);
+   obstacle8.vertex(210, 395);
+   obstacle8.vertex(210, 405);
    obstacle8.vertex(375, 405);
    obstacle8.vertex(375, 395);
    obstacle8.setFill(black);
@@ -435,8 +447,8 @@ void keyPressed() {
    obstacle9 = new FPoly();
    obstacle9.vertex(425, 395);
    obstacle9.vertex(425, 405);
-   obstacle9.vertex(600, 405);
-   obstacle9.vertex(600, 395);
+   obstacle9.vertex(590, 405);
+   obstacle9.vertex(590, 395);
    obstacle9.setFill(black);
    obstacle9.setGrabbable(false);
    obstacle9.setStatic(false);
@@ -446,6 +458,48 @@ void keyPressed() {
    
    world.add(obstacle8);
    world.add(obstacle9);
+ }
+ 
+ void level6() {
+   //Change in environment - triangle edges
+   obstacle10 = new FPoly();
+   obstacle10.vertex(200, 750);
+   obstacle10.vertex(350, 750);
+   obstacle10.vertex(200, 600);
+   obstacle11 = new FPoly();
+   obstacle11.vertex(200, 50);
+   obstacle11.vertex(350, 50);
+   obstacle11.vertex(200, 200);
+   obstacle12 = new FPoly();
+   obstacle12.vertex(600, 750);
+   obstacle12.vertex(450, 750);
+   obstacle12.vertex(600, 600);
+   obstacle13 = new FPoly();
+   obstacle13.vertex(600, 50);
+   obstacle13.vertex(450, 50);
+   obstacle13.vertex(600, 200);
+   
+   //Properties of added environment triangles
+   obstacle10.setFill(black);
+   obstacle11.setFill(black);
+   obstacle12.setFill(black);
+   obstacle13.setFill(black);
+   obstacle10.setStatic(true);
+   obstacle11.setStatic(true);
+   obstacle12.setStatic(true);
+   obstacle13.setStatic(true);
+   obstacle10.setGrabbable(false);
+   obstacle11.setGrabbable(false);
+   obstacle12.setGrabbable(false);
+   obstacle13.setGrabbable(false);
+   
+   //Rect obstacles
+   
+   
+   world.add(obstacle10);
+   world.add(obstacle11);
+   world.add(obstacle12);
+   world.add(obstacle13);
  }
  
  void objectRotation() {
