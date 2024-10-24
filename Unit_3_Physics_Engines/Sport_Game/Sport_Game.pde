@@ -68,6 +68,10 @@ FPoly obstacle7;
 float obstaclerotation;
 FPoly obstacle8;
 FPoly obstacle9;
+FPoly obstacle10;
+FPoly obstacle11;
+FPoly obstacle12;
+FPoly obstacle13;
 
 void setup() {
   size (800, 800);
@@ -80,7 +84,7 @@ void setup() {
   makeWorld();
   
   //Instantiate boolean
-  totalLevels = 6;
+  totalLevels = 7;
   deleteFromWorld = new boolean[totalLevels];
   
   for (int i = 0; i < totalLevels; i++) {
@@ -121,6 +125,7 @@ void setup() {
 }
 
 void draw() {
+   world.step();
   if (mode == INTRO) {
       Intro();
     } else if (mode == GAME) {
