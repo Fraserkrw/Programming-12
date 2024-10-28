@@ -7,6 +7,12 @@ void Game() {
       deleteFromWorld[level-1] = true;
     }
     addLevelObstacles();
+    if (level > 6) {
+      level = 1;
+      for (int i = 0; i < totalLevels; i++) {
+      deleteFromWorld[i] = false;
+      }
+    }
     levelchange = false;
   }
   scoreTracking();
@@ -21,6 +27,7 @@ void Game() {
   ballReset();
   }
   objectRotation(); //rotations
+  endGame();
 }
 
 void gameClicks() {
@@ -149,6 +156,7 @@ void addLevelObstacles() {
     obstacle11.setPosition(-2000, -2000);
     obstacle12.setPosition(-2000, -2000);
     obstacle13.setPosition(-2000, -2000);
+    obstacle14.setPosition(-2000, -2000);
   }
 }
 
@@ -225,11 +233,19 @@ void scoreTracking() {
   scoreboard();
   if (PlayerTurn == Blue && hitGoal()) {
     Player1Score++;
+    if (levelskip == true) {
+    Player1Score--;
+    levelskip = false;
+    }
     ballReset();
     turnsCompleted++;
   }
   if (PlayerTurn == Red && hitGoal()) {
     Player2Score++;
+    if (levelskip == true) {
+    Player2Score--;
+    levelskip = false;
+    }
     ballReset();
     turnsCompleted++;
   }
@@ -265,6 +281,12 @@ void keyPressed() {
     //Cheat
     if (key == 'P' || key == 'p') {
       ball.setPosition(width/2, 100);
+    }
+    
+    //Level Skip
+    if (key == 'O' || key == 'o') {
+      ball.setPosition(width/2, 100);
+      levelskip = true;
     }
   }
  
@@ -478,20 +500,25 @@ void keyPressed() {
    obstacle13.vertex(600, 50);
    obstacle13.vertex(450, 50);
    obstacle13.vertex(600, 200);
+   obstacle14 = new FBox(150, 400);
+   obstacle14.setPosition(width/2, height/2);
    
    //Properties of added environment triangles
    obstacle10.setFill(black);
    obstacle11.setFill(black);
    obstacle12.setFill(black);
    obstacle13.setFill(black);
+   obstacle14.setFill(black);
    obstacle10.setStatic(true);
    obstacle11.setStatic(true);
    obstacle12.setStatic(true);
    obstacle13.setStatic(true);
+   obstacle14.setStatic(true);
    obstacle10.setGrabbable(false);
    obstacle11.setGrabbable(false);
    obstacle12.setGrabbable(false);
    obstacle13.setGrabbable(false);
+   obstacle14.setGrabbable(false);
    
    //Rect obstacles
    
@@ -500,6 +527,7 @@ void keyPressed() {
    world.add(obstacle11);
    world.add(obstacle12);
    world.add(obstacle13);
+   world.add(obstacle14);
  }
  
  void objectRotation() {
@@ -509,5 +537,38 @@ void keyPressed() {
    if (level == 5 && obstacle8 != null && obstacle9 != null ) {
    obstacle8.setAngularVelocity(-5);
    obstacle9.setAngularVelocity(5);
+   }
+ }
+ 
+ void gameReset() {
+   level = 0;
+   PlayerTurn = (int) random(1, 3);
+   Player1Score = 0;
+   Player2Score = 0;
+   angle = -PI/2;
+   chargeX = 0;
+   moving = false;
+   hit = false;
+   levelchange = false;
+   ballD = 40;
+   
+   for (int i = 0; i < totalLevels; i++) {
+   deleteFromWorld[i] = true;
+   addLevelObstacles();
+   }
+   
+   for (int i = 0; i < totalLevels; i++) {
+   deleteFromWorld[i] = false;
+   }
+ }
+ 
+ void endGame() {
+   if (Player2Score > Player1Score+2) {
+     mode = GAMEOVER;
+     winner = RedWins;
+   }
+   if (Player2Score+2 < Player1Score) {
+     mode = GAMEOVER;
+     winner = BlueWins;
    }
  }
