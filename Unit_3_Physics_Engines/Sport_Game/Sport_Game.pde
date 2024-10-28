@@ -27,6 +27,9 @@ final int Blue = 1;
 final int Red = 2;
 int Player1Score;
 int Player2Score;
+int winner;
+final int BlueWins = 1;
+final int RedWins = 2;
 
 //Boundary
 FPoly boundary;
@@ -56,6 +59,7 @@ int totalLevels;
 boolean levelchange;
 int turnsCompleted;
 boolean[] deleteFromWorld;
+boolean levelskip;
 
 //Obstacles
 FBox obstacle1;
@@ -72,6 +76,7 @@ FPoly obstacle10;
 FPoly obstacle11;
 FPoly obstacle12;
 FPoly obstacle13;
+FBox obstacle14;
 
 void setup() {
   size (800, 800);
@@ -98,11 +103,13 @@ void setup() {
   downkey = false;
   spacekey = false;
   arrowActive = true;
+  levelskip = false;
   
   //Player
   PlayerTurn = (int) random(1, 3);
   Player1Score = 0;
   Player2Score = 0;
+  winner = 0;
   
   //Angle Variables
   angle = -PI/2; //Arrow
