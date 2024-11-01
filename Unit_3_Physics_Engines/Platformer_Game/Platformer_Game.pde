@@ -14,22 +14,35 @@ color brown = #9c5a3c;
 
 PImage map;
 int gridSize = 32;
+float zoom = 1.5;
 boolean upkey, leftkey, rightkey, wkey, akey, dkey;
+boolean jumped = false;
 FPlayer player1;
+ArrayList<FBox> terrainPixels;
+int pixelcount = 0;
 
 void setup() {
   size (800, 800);
   Fisica.init(this);
   map = loadImage("platformermap.png");
+  terrainPixels = new ArrayList<FBox>();
   loadWorld(map);
   loadPlayer();
 }
 
 void draw() {
   background(brown);
+  drawWorld();
+  loadPlayerMovement();
+}
+
+void drawWorld() {
+  pushMatrix();
+  translate(-player1.getX()*zoom+width/2, -player1.getY()*zoom+height/2);
+  scale(zoom);
   world.step();
   world.draw();
-  loadPlayerMovement();
+  popMatrix();
 }
 
 void loadWorld(PImage img) {
@@ -40,12 +53,10 @@ void loadWorld(PImage img) {
     for (int x = 0; x < img.width; x++) {
       color c = img.get(x, y);
       if (c == green || c == black) {
-        FBox terrainpixel = new FBox(gridSize, gridSize);
-        terrainpixel.setPosition(x*gridSize, y*gridSize);
-        terrainpixel.setStatic(true);
-        terrainpixel.setGrabbable(false);
-        terrainpixel.setFill(c);
-        world.add(terrainpixel);
+        terrainPixels.add(new terrainPixel(x, y, c));
+        FBox pixel = terrainPixels.get(pixelcount);
+        world.add(pixel);
+        pixelcount++;
       }
     }
   }
