@@ -24,6 +24,12 @@ class FPlayer extends FBox {
     if (hitGround() == true) {
       jumped = false;
     }
+    if (touchingPortal() == true) {
+      if (currentmap == 0) {
+      setPosition(100, 100);
+      }
+      mapchange = true;
+    }
   }
 
   boolean hitGround() {
@@ -31,5 +37,16 @@ class FPlayer extends FBox {
       return true;
     }
     return false;
+  }
+  
+  boolean touchingPortal() {
+    ArrayList<FContact> playercontactList = getContacts();
+    for (int i = 0; i < playercontactList.size(); i++) {
+      FContact playerContacts = playercontactList.get(i);
+      if (playerContacts.contains(portal)) {
+        return true;
+      }
+    }
+   return false;
   }
 }
