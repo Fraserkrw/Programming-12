@@ -1,5 +1,6 @@
 import fisica.*;
 FWorld world;
+FWorld world1;
 
 //Adrian Wong
 //October 29th, 2024
@@ -11,27 +12,42 @@ color red = #FF0000;
 color green = #22b14c;
 color blue = #0000FF;
 color brown = #9c5a3c;
+color darkbrown = #672C05;
+color orange = #ff7e00;
+color maroon = #990030;
 
-PImage map;
+PImage[] maps;
+int totalmaps;
+int currentmap = 0;
 int gridSize = 32;
 float zoom = 1.5;
 boolean upkey, leftkey, rightkey, wkey, akey, dkey;
 boolean jumped = false;
 FPlayer player1;
+FBox portal;
 ArrayList<FBox> terrainPixels;
 int pixelcount = 0;
+boolean setMap = true;
+boolean mapchange = false;
 
 void setup() {
   size (800, 800);
+  
+  totalmaps = 2;
   Fisica.init(this);
-  map = loadImage("platformermap.png");
+  maps = new PImage[3];
+  maps[0] = loadImage("platformermap1.png");
+  maps[1] = loadImage("platformermap2.png");
   terrainPixels = new ArrayList<FBox>();
-  loadWorld(map);
-  loadPlayer();
 }
 
 void draw() {
+  if (currentmap == 0) {
   background(brown);
+  } else if (currentmap == 1) {
+  background(darkbrown);
+  }
+  manageMaps();
   drawWorld();
   loadPlayerMovement();
 }
@@ -46,8 +62,9 @@ void drawWorld() {
 }
 
 void loadWorld(PImage img) {
+  if (currentmap == 0) {
   world = new FWorld (-2000, -2000, 2000, 2000);
-  world.setGravity(0, 900);
+  world.setGravity(0, 800);
   
   for (int y = 0; y < img.height; y++) {
     for (int x = 0; x < img.width; x++) {
@@ -58,9 +75,48 @@ void loadWorld(PImage img) {
         world.add(pixel);
         pixelcount++;
       }
+      if (c == maroon) {
+        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png"));
+        portal = terrainPixels.get(pixelcount);
+        world.add(portal);
+        pixelcount++;
+      }
     }
   }
+ }
+ 
+if (currentmap == 1) {
+  world1 = new FWorld (-2000, -2000, 2000, 2000);
+  world1.setGravity(0, 800);
+  
+  for (int y = 0; y < img.height; y++) {
+    for (int x = 0; x < img.width; x++) {
+      color c = img.get(x, y);
+      if (c == brown) {
+        terrainPixels.add(new terrainPixel(x, y, "obsidianblocktexture.jpg"));
+        FBox pixel = terrainPixels.get(pixelcount);
+        world1.add(pixel);
+        pixelcount++;
+      }
+      if (c == black) {
+        terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg"));
+        FBox pixel = terrainPixels.get(pixelcount);
+        world1.add(pixel);
+        pixelcount++;
+      }
+      if (c == maroon) {
+        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png"));
+        portal = terrainPixels.get(pixelcount);
+        world1.add(portal);
+        pixelcount++;
+      }
+    }
+  }
+ }
 }
+ 
+ 
+
 
 void loadPlayer() {
   player1 = new FPlayer();
@@ -69,4 +125,20 @@ void loadPlayer() {
 
 void loadPlayerMovement() {
   player1.act();
+}
+
+void manageMaps() {
+  if (setMap == true) {
+    loadWorld(maps[currentmap]);
+    loadPlayer();
+    setMap = false;
+  }
+  if (mapchange == true) {
+    pixelcount = 0;
+    terrainPixels.clear();
+    currentmap++;
+    loadWorld(maps[currentmap]);
+    world1.add(player1);
+    mapchange = false;
+  }
 }
