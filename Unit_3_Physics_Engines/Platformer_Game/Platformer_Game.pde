@@ -18,6 +18,7 @@ color maroon = #990030;
 
 PImage[] maps;
 int totalmaps;
+int totalWorlds;
 int currentmap = 0;
 int gridSize = 32;
 float zoom = 1.5;
@@ -26,6 +27,7 @@ boolean jumped = false;
 FPlayer player1;
 FBox portal;
 ArrayList<FBox> terrainPixels;
+ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
@@ -34,11 +36,17 @@ void setup() {
   size (800, 800);
   
   totalmaps = 2;
+  totalWorlds = 2;
   Fisica.init(this);
   maps = new PImage[3];
   maps[0] = loadImage("platformermap1.png");
   maps[1] = loadImage("platformermap2.png");
   terrainPixels = new ArrayList<FBox>();
+  worlds = new ArrayList<FWorld>();
+  
+  //for (int i = 0; i < totalWorlds; i++) {
+  //worlds.add(new FWorld(-2000, -2000, 2000, 2000));
+  //}
 }
 
 void draw() {
@@ -76,7 +84,7 @@ void loadWorld(PImage img) {
         pixelcount++;
       }
       if (c == maroon) {
-        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png"));
+        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png", 0));
         portal = terrainPixels.get(pixelcount);
         world.add(portal);
         pixelcount++;
@@ -86,28 +94,28 @@ void loadWorld(PImage img) {
  }
  
 if (currentmap == 1) {
-  world1 = new FWorld (-2000, -2000, 2000, 2000);
-  world1.setGravity(0, 800);
+  world = new FWorld (-2000, -2000, 2000, 2000);
+  world.setGravity(0, 800);
   
   for (int y = 0; y < img.height; y++) {
     for (int x = 0; x < img.width; x++) {
       color c = img.get(x, y);
       if (c == brown) {
-        terrainPixels.add(new terrainPixel(x, y, "obsidianblocktexture.jpg"));
+        terrainPixels.add(new terrainPixel(x, y, "obsidianblocktexture.jpg", 0));
         FBox pixel = terrainPixels.get(pixelcount);
-        world1.add(pixel);
+        world.add(pixel);
         pixelcount++;
       }
       if (c == black) {
-        terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg"));
+        terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg", 0.4));
         FBox pixel = terrainPixels.get(pixelcount);
-        world1.add(pixel);
+        world.add(pixel);
         pixelcount++;
       }
       if (c == maroon) {
-        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png"));
+        terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png", 0));
         portal = terrainPixels.get(pixelcount);
-        world1.add(portal);
+        world.add(portal);
         pixelcount++;
       }
     }
@@ -138,7 +146,11 @@ void manageMaps() {
     terrainPixels.clear();
     currentmap++;
     loadWorld(maps[currentmap]);
-    world1.add(player1);
+    world.add(player1);
     mapchange = false;
   }
+}
+
+void loadingScreen() {
+
 }
