@@ -7,9 +7,10 @@ class terrainPixel extends FBox {
     setStatic(true);
     setStroke(pixelcolor);
   }
-  terrainPixel(int x, int y, String _img) {
+  terrainPixel(int x, int y, String _img, float frictionamount) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
+    setFriction(frictionamount);
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
     attachImage(img);
