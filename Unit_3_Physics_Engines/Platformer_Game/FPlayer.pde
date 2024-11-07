@@ -27,6 +27,7 @@ class FPlayer extends FBox {
     if (touchingPortal() == true) {
       if (currentmap == 0) {
       setPosition(100, 100);
+      setVelocity(0, 0);
       }
       mapchange = true;
     }
