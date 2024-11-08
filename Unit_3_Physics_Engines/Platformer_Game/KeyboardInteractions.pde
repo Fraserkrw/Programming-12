@@ -5,6 +5,7 @@ void keyPressed() {
   if (keyCode == UP) upkey = true;
   if (keyCode == RIGHT) rightkey = true;
   if (keyCode == LEFT) leftkey = true;
+  if (key == 'p') skiplevel = true;
 }
 
 void keyReleased() {
