@@ -12,7 +12,7 @@ color red = #FF0000;
 color green = #22b14c;
 color blue = #0000FF;
 color brown = #9c5a3c;
-color darkbrown = #672C05;
+color darkbrown = #2E1A01;
 color orange = #ff7e00;
 color maroon = #990030;
 
@@ -22,18 +22,27 @@ int totalWorlds;
 int currentmap = 0;
 int gridSize = 32;
 float zoom = 1.5;
-boolean upkey, leftkey, rightkey, wkey, akey, dkey;
+boolean upkey, leftkey, rightkey, wkey, akey, dkey, skiplevel;
 boolean jumped = false;
 FPlayer player1;
 FBox portal;
+FBox jumpboost;
 ArrayList<FBox> terrainPixels;
 ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
 
+
+//Fonts
+PFont PixelFont;
+
 void setup() {
   size (800, 800);
+  textAlign(CENTER);
+  
+  //Initialize Fonts
+  PixelFont = createFont("PixelFont.ttf", 100);
   
   totalmaps = 2;
   totalWorlds = 2;
@@ -112,6 +121,12 @@ if (currentmap == 1) {
         world.add(pixel);
         pixelcount++;
       }
+      if (c == orange) {
+        terrainPixels.add(new terrainPixel(x, y, "jumpboostarrow.png", 0));
+        jumpboost = terrainPixels.get(pixelcount);
+        world.add(jumpboost);
+        pixelcount++;
+      }
       if (c == maroon) {
         terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png", 0));
         portal = terrainPixels.get(pixelcount);
@@ -152,5 +167,9 @@ void manageMaps() {
 }
 
 void loadingScreen() {
-
+   background(black);
+   fill(white);
+   textFont(PixelFont);
+   textSize(60);
+   text("Loading Next World...", width/2, height/2);
 }
