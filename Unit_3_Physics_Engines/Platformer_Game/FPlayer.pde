@@ -10,7 +10,7 @@ class FPlayer extends FBox {
 
   void act() {
    movementMechanics();
-   handleBlockInput();
+   handlePortalInput();
   }
 
   boolean hitGround() {
@@ -31,28 +31,39 @@ class FPlayer extends FBox {
    return false;
   }
   boolean touchingJumpBoost() {
-    ArrayList<FContact> playercontactList = getContacts();
+     ArrayList<FBox> playercontactList = getTouching();
     for (int i = 0; i < playercontactList.size(); i++) {
-      FContact playerContacts = playercontactList.get(i);
-      if (playerContacts.contains(jumpboost)) {
-        return true;
-      }
+    FBox boxincontact = playercontactList.get(i);
+    if (boxincontact.getName() == "jumpboost") {
+      return true;
     }
+   }
+   return false;
+  }
+  
+  boolean touchingWater() {
+    ArrayList<FBox> playercontactList = getTouching();
+    for (int i = 0; i < playercontactList.size(); i++) {
+    FBox boxincontact = playercontactList.get(i);
+    if (boxincontact.getName() == "water" && getY() == boxincontact.getY()+16) {
+      return true;
+    }
+   }
    return false;
   }
   
   void movementMechanics() {
-    float vy = getVelocityY();
-    float vx = getVelocityX();
-    if (akey) setVelocity (-150, vy);
-    if (dkey) setVelocity (150, vy);
+    if (abs(getVelocityX()) < 150) {
+    if (akey) addImpulse (-20, 0);
+    if (dkey) addImpulse (20, 0);
+    }
     if (skiplevel) {
       if (currentmap == 0) {
         setPosition(portal.getX()-10, portal.getY());
       }
     }
     if (wkey == true && jumped == false) {
-      setVelocity (vx, 20000);
+      setVelocity (vx, -450);
       jumped = true;
     }
     if (jumped == true) {
@@ -71,11 +82,19 @@ class FPlayer extends FBox {
       mapchange = true;
     }
     if (touchingJumpBoost() == true) {
-      setVelocity(0, 10000);
+      if (jumped == false) {
+      setVelocity(0, -600);
+      }
+      jumped = true;
+    }
+    if (touchingWater()) {
+      if (currentmap == 1) {
+      setPosition(100, 120);
+      }
     }
   }
   
-  void handleBlockInput() {
+  void handlePortalInput() {
      if (touchingPortal() == true) {
       loadingScreen();
       if (currentmap == 0) {
@@ -83,9 +102,6 @@ class FPlayer extends FBox {
       setVelocity(-vx, 0);
       }
       mapchange = true;
-    }
-    if (touchingJumpBoost() == true) {
-      setVelocity(vx, 10000);
     }
   }
 }
