@@ -1,16 +1,24 @@
 class terrainPixel extends FBox {
    
-  terrainPixel(int x, int y, color pixelcolor) {
+  terrainPixel(int x, int y, color pixelcolor, float bounciness) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
+    setRestitution(bounciness);
     setFillColor(pixelcolor);
     setStatic(true);
     setStroke(pixelcolor);
   }
-  terrainPixel(int x, int y, String _img, float frictionamount) {
+  terrainPixel(int x, int y, String _img, float frictionamount, int type) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
     setFriction(frictionamount);
+    if (type == 1) {
+    setName("jumpboost");
+    }
+    if (type == 2) {
+    setSensor(true);
+    setName("water");
+    }
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
     attachImage(img);
