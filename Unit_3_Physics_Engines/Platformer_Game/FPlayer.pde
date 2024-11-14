@@ -5,6 +5,7 @@ class FPlayer extends FBox {
   FPlayer() {
     super(gridSize-5, gridSize-5);
     setPosition(50, 50);
+    setRotatable(false);
     setFillColor(blue);
   }
 
@@ -45,7 +46,7 @@ class FPlayer extends FBox {
     ArrayList<FBox> playercontactList = getTouching();
     for (int i = 0; i < playercontactList.size(); i++) {
     FBox boxincontact = playercontactList.get(i);
-    if (boxincontact.getName() == "water" && getY() == boxincontact.getY()+16) {
+    if (boxincontact.getName() == "water" && player1.getY() > boxincontact.getY()) {
       return true;
     }
    }
@@ -89,7 +90,8 @@ class FPlayer extends FBox {
     }
     if (touchingWater()) {
       if (currentmap == 1) {
-      setPosition(100, 120);
+      setPosition(100, 150);
+      setVelocity(0, 0);
       }
     }
   }
