@@ -16,6 +16,7 @@ color darkbrown = #2E1A01;
 color orange = #ff7e00;
 color maroon = #990030;
 color yellow = #fff200;
+color grey = #464646;
 
 PImage[] maps;
 int totalmaps;
@@ -112,7 +113,7 @@ if (currentmap == 1) {
         pixelcount++;
       }
       if (c == black) {
-        terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg", 0.4, 0));
+        terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg", 1, 0));
         FBox pixel = terrainPixels.get(pixelcount);
         world.add(pixel);
         pixelcount++;
@@ -128,6 +129,12 @@ if (currentmap == 1) {
        FBox water = terrainPixels.get(pixelcount);
        world.add(water);
        pixelcount++;
+      }
+      if (c == grey) {
+      terrainPixels.add(new terrainPixel(x, y, "iceblock.jpg", 0, 0));
+      FBox ice = terrainPixels.get(pixelcount);
+      world.add(ice);
+      pixelcount++;
       }
       if (c == maroon) {
         terrainPixels.add(new terrainPixel(x, y, "teleporterblock.png", 0, 0));
