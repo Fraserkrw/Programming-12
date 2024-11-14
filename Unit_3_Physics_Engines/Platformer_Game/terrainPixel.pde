@@ -5,6 +5,7 @@ class terrainPixel extends FBox {
     setPosition(x*gridSize, y*gridSize);
     setRestitution(bounciness);
     setFillColor(pixelcolor);
+    setGrabbable(false);
     setStatic(true);
     setStroke(pixelcolor);
   }
@@ -12,6 +13,7 @@ class terrainPixel extends FBox {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
     setFriction(frictionamount);
+    setGrabbable(false);
     if (type == 1) {
     setName("jumpboost");
     }
