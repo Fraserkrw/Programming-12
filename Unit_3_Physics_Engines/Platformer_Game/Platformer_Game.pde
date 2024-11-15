@@ -23,7 +23,7 @@ int totalmaps;
 int totalWorlds;
 int currentmap = 0;
 int gridSize = 32;
-float zoom = 1.5;
+float zoom = 2;
 boolean upkey, leftkey, rightkey, wkey, akey, dkey, skiplevel;
 boolean jumped = false;
 FPlayer player1;
@@ -68,7 +68,13 @@ void draw() {
 
 void drawWorld() {
   pushMatrix();
+  if (player1.getX() > 183.78 && player1.getX() < 807.6) {
   translate(-player1.getX()*zoom+width/2, -player1.getY()*zoom+height/2);
+  } else if (player1.getX() < 183.78) {
+  translate(-183.78*zoom+width/2, -player1.getY()*zoom+height/2);
+  } else if (player1.getX() > 807.6) {
+  translate(-807.6*zoom+width/2, -player1.getY()*zoom+height/2);
+  }
   scale(zoom);
   world.step();
   world.draw();
@@ -102,6 +108,7 @@ void loadWorld(PImage img) {
 if (currentmap == 1) {
   world = new FWorld (-2000, -2000, 2000, 2000);
   world.setGravity(0, 800);
+  world.setEdges(-20, 0, 962, 992);
   
   for (int y = 0; y < img.height; y++) {
     for (int x = 0; x < img.width; x++) {
