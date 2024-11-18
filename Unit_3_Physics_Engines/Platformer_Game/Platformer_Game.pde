@@ -10,6 +10,7 @@ color white = #FFFFFF;
 color black = #000000;
 color red = #FF0000;
 color green = #22b14c;
+color lightgreen = #a8e61d;
 color blue = #0000FF;
 color brown = #9c5a3c;
 color darkbrown = #2E1A01;
@@ -17,6 +18,7 @@ color orange = #ff7e00;
 color maroon = #990030;
 color yellow = #fff200;
 color grey = #464646;
+color lightgrey = #b4b4b4;
 
 PImage[] maps;
 int totalmaps;
@@ -113,6 +115,9 @@ if (currentmap == 1) {
   for (int y = 0; y < img.height; y++) {
     for (int x = 0; x < img.width; x++) {
       color c = img.get(x, y);
+      //color cbelow = img.get(x, y+1);
+      color leftblock = img.get(x-1, y);
+      color rightblock = img.get(x+1, y);
       if (c == brown) {
         terrainPixels.add(new terrainPixel(x, y, "obsidianblocktexture.jpg", 0, 0));
         FBox pixel = terrainPixels.get(pixelcount);
@@ -123,6 +128,30 @@ if (currentmap == 1) {
         terrainPixels.add(new terrainPixel(x, y, "stoneblocktexture.jpg", 1, 0));
         FBox pixel = terrainPixels.get(pixelcount);
         world.add(pixel);
+        pixelcount++;
+      }
+      if (c == lightgreen && leftblock == green && rightblock == lightgreen) {
+        terrainPixels.add(new terrainPixel(x, y, "treetop_w.png", 0, 3));
+        FBox treepixel = terrainPixels.get(pixelcount);
+        world.add(treepixel);
+        pixelcount++;
+      }
+      if (c == lightgreen && leftblock == lightgreen && rightblock == lightgreen) {
+        terrainPixels.add(new terrainPixel(x, y, "tree_intersect.png", 0, 3));
+        FBox treepixel = terrainPixels.get(pixelcount);
+        world.add(treepixel);
+        pixelcount++;
+      }
+      if (c == lightgreen && leftblock == lightgreen && rightblock == green) {
+        terrainPixels.add(new terrainPixel(x, y, "treetop_e.png", 0, 3));
+        FBox treepixel = terrainPixels.get(pixelcount);
+        world.add(treepixel);
+        pixelcount++;
+      }
+      if (c == lightgrey) {
+        terrainPixels.add(new terrainPixel(x, y, "tree_trunk.png", 0, 3));
+        FBox treepixel = terrainPixels.get(pixelcount);
+        world.add(treepixel);
         pixelcount++;
       }
       if (c == orange) {
