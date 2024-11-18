@@ -16,10 +16,15 @@ class terrainPixel extends FBox {
     setGrabbable(false);
     if (type == 1) {
     setName("jumpboost");
+    setRestitution(1);
     }
     if (type == 2) {
     setSensor(true);
     setName("water");
+    }
+    if (type == 3) {
+    setSensor(true);
+    setName("treePixels");
     }
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
