@@ -10,7 +10,7 @@ class FPlayer extends FBox {
   }
 
   void act() {
-   movementMechanics();
+   playerInteractions();
    handlePortalInput();
   }
 
@@ -53,7 +53,18 @@ class FPlayer extends FBox {
    return false;
   }
   
-  void movementMechanics() {
+  boolean touchingSand() {
+    ArrayList<FBox> playercontactList = getTouching();
+    for (int i = 0; i < playercontactList.size(); i++) {
+    FBox boxincontact = playercontactList.get(i);
+    if (boxincontact.getName() == "sand") {
+      return true;
+    }
+   }
+   return false;
+  }
+  
+  void playerInteractions() {
     if (abs(getVelocityX()) < 150) {
     if (akey) addImpulse (-20, 0);
     if (dkey) addImpulse (20, 0);
@@ -94,6 +105,9 @@ class FPlayer extends FBox {
       setVelocity(0, 0);
       }
     }
+    if (touchingSand()) {
+       
+    }
   }
   
   void handlePortalInput() {
@@ -106,4 +120,4 @@ class FPlayer extends FBox {
       mapchange = true;
     }
   }
-}
+ }
