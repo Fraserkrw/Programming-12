@@ -26,6 +26,9 @@ class terrainPixel extends FBox {
     setSensor(true);
     setName("treePixels");
     }
+    if (type == 4) {
+    setName("sand");
+    }
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
     attachImage(img);
