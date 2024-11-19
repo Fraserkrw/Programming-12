@@ -6,6 +6,7 @@ void keyPressed() {
   if (keyCode == RIGHT) rightkey = true;
   if (keyCode == LEFT) leftkey = true;
   if (key == 'p' || key == 'P') skiplevel = true;
+  if (key == 'z' || key == 'Z') zoomout = true;
 }
 
 void keyReleased() {
@@ -15,4 +16,5 @@ void keyReleased() {
   if (keyCode == UP) upkey = false;
   if (keyCode == RIGHT) rightkey = false;
   if (keyCode == LEFT) leftkey = false;
+  if (key == 'z' || key == 'Z') zoomout = false;
 }
