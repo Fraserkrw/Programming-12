@@ -1,6 +1,6 @@
-class terrainPixel extends FBox {
+class basicterrainPixel extends FBox {
    
-  terrainPixel(int x, int y, color pixelcolor, float bounciness) {
+  basicterrainPixel(int x, int y, color pixelcolor, float bounciness) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
     setRestitution(bounciness);
@@ -9,7 +9,7 @@ class terrainPixel extends FBox {
     setStatic(true);
     setStroke(pixelcolor);
   }
-  terrainPixel(int x, int y, String _img, float frictionamount, int type) {
+  basicterrainPixel(int x, int y, String _img, float frictionamount, int type) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
     setFriction(frictionamount);
@@ -27,7 +27,7 @@ class terrainPixel extends FBox {
     setName("treePixels");
     }
     if (type == 4) {
-    setName("sand");
+    setName("portal");
     }
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
