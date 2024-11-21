@@ -1,17 +1,17 @@
-class FPlayer extends FBox {
-
+class FPlayer extends FGameObject {
+  
   float velocityYtrack, prevY, vy, vx;
 
   FPlayer() {
-    super(gridSize-5, gridSize-5);
+    super();
     setPosition(50, 50);
     setRotatable(false);
+    setName("player");
     setFillColor(blue);
   }
 
   void act() {
    playerInteractions();
-   handlePortalInput();
   }
 
   boolean hitGround() {
@@ -21,43 +21,11 @@ class FPlayer extends FBox {
     return false;
   }
   
-  boolean touchingPortal() {
-    ArrayList<FContact> playercontactList = getContacts();
-    for (int i = 0; i < playercontactList.size(); i++) {
-      FContact playerContacts = playercontactList.get(i);
-      if (playerContacts.contains(portal)) {
-        return true;
-      }
-    }
-   return false;
-  }
-  boolean touchingJumpBoost() {
-     ArrayList<FBox> playercontactList = getTouching();
-    for (int i = 0; i < playercontactList.size(); i++) {
-    FBox boxincontact = playercontactList.get(i);
-    if (boxincontact.getName() == "jumpboost") {
-      return true;
-    }
-   }
-   return false;
-  }
-  
   boolean touchingWater() {
     ArrayList<FBox> playercontactList = getTouching();
     for (int i = 0; i < playercontactList.size(); i++) {
     FBox boxincontact = playercontactList.get(i);
     if (boxincontact.getName() == "water" && player1.getY() > boxincontact.getY()) {
-      return true;
-    }
-   }
-   return false;
-  }
-  
-  boolean touchingSand() {
-    ArrayList<FBox> playercontactList = getTouching();
-    for (int i = 0; i < playercontactList.size(); i++) {
-    FBox boxincontact = playercontactList.get(i);
-    if (boxincontact.getName() == "sand") {
       return true;
     }
    }
@@ -85,7 +53,7 @@ class FPlayer extends FBox {
     if (hitGround() == true) {
       jumped = false;
     }
-    if (touchingPortal() == true) {
+    if (isTouching("portal")) {
       loadingScreen();
       if (currentmap == 0) {
       setPosition(100, 100);
@@ -93,31 +61,22 @@ class FPlayer extends FBox {
       }
       mapchange = true;
     }
-    if (touchingJumpBoost() == true) {
+    if (isTouching("jumpboost")) {
       if (jumped == false) {
       setVelocity(0, -600);
       }
       jumped = true;
     }
-    if (touchingWater()) {
-      if (currentmap == 1) {
-      setPosition(100, 150);
-      setVelocity(0, 0);
-      }
-    }
-    if (touchingSand()) {
-       
+    if (touchingWater() == true) {
+      playerdied();
     }
   }
   
-  void handlePortalInput() {
-     if (touchingPortal() == true) {
-      loadingScreen();
-      if (currentmap == 0) {
-      setPosition(100, 100);
-      setVelocity(-vx, 0);
+  void playerdied() {
+     if (currentmap == 1) {
+      setPosition(100, 150);
+      setVelocity(0, 0);
       }
-      mapchange = true;
-    }
+     //playerdied = true;
   }
- }
+}
