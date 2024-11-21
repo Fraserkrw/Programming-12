@@ -42,7 +42,11 @@ ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
+boolean playerdied = false;
+ArrayList<FGameObject> fancyterrain;
 
+//Images
+PImage bridge;
 
 //Fonts
 PFont PixelFont;
@@ -56,6 +60,9 @@ void setup() {
   //Initialize Fonts
   PixelFont = createFont("PixelFont.ttf", 100);
   
+  //Load Images
+  bridge = loadImage("bridge_center.png");
+  
   totalmaps = 2;
   totalWorlds = 2;
   Fisica.init(this);
@@ -64,6 +71,7 @@ void setup() {
   maps[1] = loadImage("platformermap2.png");
   terrainPixels = new ArrayList<FBox>();
   worlds = new ArrayList<FWorld>();
+  fancyterrain = new ArrayList<FGameObject>();
 }
 
 void draw() {
