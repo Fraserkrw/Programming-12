@@ -2,11 +2,13 @@ void Game() {
   if (currentmap == 0) {
     background(brown);
   } else if (currentmap == 1) {
-    background(darkbrown);
+    //background(darkbrown);
+    background(skyblue);
   }
   manageMaps();
   drawWorld();
   actWorld();
+  cheatmodeNotification();
 }
 
 void gameClicks() {
@@ -78,17 +80,20 @@ void loadWorld(PImage img) {
         color leftblock = img.get(x-1, y);
         color rightblock = img.get(x+1, y);
         if (c == brown) {
-          terrainPixels.add(new basicterrainPixel(x, y, "obsidianblocktexture.jpg", 0, 0));
+          //terrainPixels.add(new basicterrainPixel(x, y, "obsidianblocktexture.jpg", 0, 0));
+          terrainPixels.add(new basicterrainPixel(x, y, "dirt_center.png", 0, 0));
           FBox pixel = terrainPixels.get(pixelcount);
           world.add(pixel);
           pixelcount++;
         } else if (c == black) {
-          terrainPixels.add(new basicterrainPixel(x, y, "stoneblocktexture.jpg", 1, 0));
+          //terrainPixels.add(new basicterrainPixel(x, y, "stoneblocktexture.jpg", 1, 0));
+          terrainPixels.add(new basicterrainPixel(x, y, "blueBlock.png", 1, 0));
           FBox pixel = terrainPixels.get(pixelcount);
           world.add(pixel);
           pixelcount++;
         } else if (c == lightgreen && leftblock == green && rightblock == lightgreen) {
-          terrainPixels.add(new basicterrainPixel(x, y, "treetop_w.png", 0, 3));
+          //terrainPixels.add(new basicterrainPixel(x, y, "treetop_w.png", 0, 3));
+          terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
           FBox treepixel = terrainPixels.get(pixelcount);
           world.add(treepixel);
           pixelcount++;
@@ -98,7 +103,8 @@ void loadWorld(PImage img) {
           world.add(treepixel);
           pixelcount++;
         } else if (c == lightgreen && leftblock == lightgreen && rightblock == green) {
-          terrainPixels.add(new basicterrainPixel(x, y, "treetop_e.png", 0, 3));
+          //terrainPixels.add(new basicterrainPixel(x, y, "treetop_e.png", 0, 3));
+          terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
           FBox treepixel = terrainPixels.get(pixelcount);
           world.add(treepixel);
           pixelcount++;
@@ -108,7 +114,8 @@ void loadWorld(PImage img) {
           world.add(treepixel);
           pixelcount++;
         } else if (c == orange) {
-          terrainPixels.add(new basicterrainPixel(x, y, "jumpboostarrow.png", 0, 1));
+          //terrainPixels.add(new basicterrainPixel(x, y, "jumpboostarrow.png", 0, 1));
+          terrainPixels.add(new basicterrainPixel(x, y, "ladder.png", 0, 1));
           FBox jumpboost = terrainPixels.get(pixelcount);
           world.add(jumpboost);
           pixelcount++;
@@ -171,4 +178,16 @@ void loadingScreen() {
   textFont(PixelFont);
   textSize(60);
   text("Loading Next World...", width/2, height/2);
+}
+
+void cheatmodeNotification() {
+  if (cheatmode == true) {
+    fill (grey);
+    stroke(black);
+    rect(100, 50, 170, 50);
+    fill(black);
+    textFont(PixelFont);
+    textSize(20);
+    text("Cheatmode: On", 100, 50);
+  }
 }
