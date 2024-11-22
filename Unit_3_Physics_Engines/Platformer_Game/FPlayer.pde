@@ -11,7 +11,11 @@ class FPlayer extends FGameObject {
   }
 
   void act() {
+   playerMoving();
    playerInteractions();
+   if (cheatmode == false) {
+   playerDangerousInteractions();
+   }
   }
 
   boolean hitGround() {
@@ -32,7 +36,7 @@ class FPlayer extends FGameObject {
    return false;
   }
   
-  void playerInteractions() {
+  void playerMoving() {
     if (abs(getVelocityX()) < 150) {
     if (akey) addImpulse (-20, 0);
     if (dkey) addImpulse (20, 0);
@@ -53,6 +57,9 @@ class FPlayer extends FGameObject {
     if (hitGround() == true) {
       jumped = false;
     }
+  }
+  
+  void playerInteractions() {
     if (isTouching("portal")) {
       loadingScreen();
       if (currentmap == 0) {
@@ -67,6 +74,9 @@ class FPlayer extends FGameObject {
       }
       jumped = true;
     }
+  }
+  
+  void playerDangerousInteractions() {
     if (touchingWater() == true) {
       playerdied();
     }
