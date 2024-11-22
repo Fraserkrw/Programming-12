@@ -26,6 +26,7 @@ color yellow = #fff200;
 color grey = #464646;
 color lightgrey = #b4b4b4;
 color pink = #ffa3b1;
+color skyblue = #87CEEB;
 
 PImage[] maps;
 int totalmaps;
@@ -34,6 +35,7 @@ int currentmap = 0;
 int gridSize = 32;
 float zoom = 2;
 boolean upkey, leftkey, rightkey, wkey, akey, dkey, skiplevel, zoomout;
+boolean cheatmode = false;
 boolean jumped = false;
 FPlayer player1;
 FBox portal;
@@ -46,7 +48,7 @@ boolean playerdied = false;
 ArrayList<FGameObject> fancyterrain;
 
 //Images
-PImage bridge;
+PImage Bridgeblock;
 
 //Fonts
 PFont PixelFont;
@@ -61,7 +63,8 @@ void setup() {
   PixelFont = createFont("PixelFont.ttf", 100);
   
   //Load Images
-  bridge = loadImage("bridge_center.png");
+  Bridgeblock = loadImage("bridge_center.png");
+  
   
   totalmaps = 2;
   totalWorlds = 2;
