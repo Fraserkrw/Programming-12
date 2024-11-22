@@ -1,6 +1,7 @@
 class FBridge extends FGameObject {
   
   int timer;
+  float transparency = 0;
   boolean starttimer;
   float posX, posY;
   
@@ -10,10 +11,12 @@ class FBridge extends FGameObject {
     posX = x*gridSize;
     posY = y*gridSize;
     setName("bridge");
-    attachImage(bridge);
+    tint(255, transparency);
+    attachImage(Bridgeblock);
     setStatic(true);
+    setSensor(false);
     setFriction(0.2);
-    timer = 120;
+    timer = 500;
     starttimer = false;
   }
   
@@ -23,16 +26,23 @@ class FBridge extends FGameObject {
     }
     if (starttimer == true) {
       timer--;
+      //println(timer);
       }
-    if (timer == 200) {
-     setStatic(false);
+    if (timer <= 470 && timer >= 0) {
      setSensor(true);
+     setStatic(false);
+     transparency = transparency + 5;
      }
-    if (timer == 0) {
-     setPosition(posX, posY);
+    if (getY() >= 1000) {
+     setStatic(true);
+    }
+    if (timer <= 0) {
+     println("reached");
      setStatic(true);
      setSensor(false);
-     timer = 220;
+     setVelocity(0, 0);
+     setPosition(posX, posY);
+     timer = 500;
      starttimer = false;
      }
   }
