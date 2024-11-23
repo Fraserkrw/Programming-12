@@ -15,6 +15,10 @@ class FPlayer extends FGameObject {
    playerInteractions();
    if (cheatmode == false) {
    playerDangerousInteractions();
+   setGrabbable(false);
+   }
+   if (cheatmode == true) {
+   setGrabbable(true);
    }
   }
 
@@ -78,6 +82,9 @@ class FPlayer extends FGameObject {
   
   void playerDangerousInteractions() {
     if (touchingWater() == true) {
+      playerdied();
+    }
+    if (isTouching("lava")) {
       playerdied();
     }
   }
