@@ -133,6 +133,10 @@ void loadWorld(PImage img) {
           FBridge bridge = new FBridge(x, y);
           fancyterrain.add(bridge);
           world.add(bridge);
+        } else if (c == darkblue) {
+          FLava lavablock = new FLava(x, y);
+          fancyterrain.add(lavablock);
+          world.add(lavablock);
         } else if (c == maroon) {
           terrainPixels.add(new basicterrainPixel(x, y, "teleporterblock.png", 0, 4));
           FBox portal = terrainPixels.get(pixelcount);
