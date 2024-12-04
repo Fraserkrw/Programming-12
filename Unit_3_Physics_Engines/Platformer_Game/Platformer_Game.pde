@@ -14,10 +14,9 @@ final int GAMEOVER = 4;
 
 color white = #FFFFFF;
 color black = #000000;
-color red = #FF0000;
+color red = #ed1c24;
 color green = #22b14c;
 color lightgreen = #a8e61d;
-color blue = #0000FF;
 color brown = #9c5a3c;
 color darkbrown = #2E1A01;
 color orange = #ff7e00;
@@ -26,13 +25,18 @@ color yellow = #fff200;
 color grey = #464646;
 color lightgrey = #b4b4b4;
 color pink = #ffa3b1;
+color blue = #4d6df3;
 color skyblue = #87CEEB;
+color darkpurple = #6f3198;
+color darkblue = #2f3699;
+color lightpurple = #b5a5d5;
 
 PImage[] maps;
 int totalmaps;
 int totalWorlds;
 int currentmap = 0;
 int gridSize = 32;
+int spawnX, spawnY;
 float zoom = 2;
 boolean upkey, leftkey, rightkey, wkey, akey, dkey, skiplevel, zoomout;
 boolean cheatmode = false;
@@ -44,8 +48,9 @@ ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
-boolean playerdied = false;
+boolean playerdied = true;
 ArrayList<FGameObject> fancyterrain;
+ArrayList<FGameObject> enemies;
 
 //Images
 PImage Bridgeblock;
@@ -75,6 +80,7 @@ void setup() {
   terrainPixels = new ArrayList<FBox>();
   worlds = new ArrayList<FWorld>();
   fancyterrain = new ArrayList<FGameObject>();
+  enemies = new ArrayList<FGameObject>();
 }
 
 void draw() {
