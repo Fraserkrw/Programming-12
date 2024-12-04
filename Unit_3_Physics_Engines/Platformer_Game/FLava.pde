@@ -14,11 +14,11 @@ class FLava extends FGameObject {
     lava = new PImage[6];
     for (int i = 0; i < 6; i++) {
      lava[i] = loadImage("lava"+i+".png");
+     lava[i].resize(gridSize, gridSize);
     }
   }
   
   void act() {
-    lava[a].resize(gridSize, gridSize);
     attachImage(lava[a]);
     if (timer > 0) {
       timer--;
