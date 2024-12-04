@@ -20,6 +20,10 @@ void actWorld() {
     FGameObject terrain = fancyterrain.get(i);
     terrain.act();
   }
+  for (int i = 0; i < enemies.size(); i++) {
+    FGameObject enemy = enemies.get(i);
+    enemy.act();
+  }
 }
 
 void drawWorld() {
@@ -53,7 +57,7 @@ void loadWorld(PImage img) {
       for (int x = 0; x < img.width; x++) {
         color c = img.get(x, y);
         if (c == green || c == black) {
-          terrainPixels.add(new basicterrainPixel(x, y, c, 0.1));
+          terrainPixels.add(new basicterrainPixel(x, y, c, 0.1, 0));
           FBox pixel = terrainPixels.get(pixelcount);
           world.add(pixel);
           pixelcount++;
@@ -71,7 +75,7 @@ void loadWorld(PImage img) {
   if (currentmap == 1) {
     world = new FWorld (-2000, -2000, 2000, 2000);
     world.setGravity(0, 800);
-    world.setEdges(-20, 0, 982, 992);
+    world.setEdges(-20, 0, 982, 1012);
 
     for (int y = 0; y < img.height; y++) {
       for (int x = 0; x < img.width; x++) {
@@ -81,19 +85,24 @@ void loadWorld(PImage img) {
         color rightblock = img.get(x+1, y);
         if (c == brown) {
           //terrainPixels.add(new basicterrainPixel(x, y, "obsidianblocktexture.jpg", 0, 0));
-          terrainPixels.add(new basicterrainPixel(x, y, "dirt_center.png", 0, 0));
+          terrainPixels.add(new basicterrainPixel(x, y, "dirt_center.png", 1, 0));
           FBox pixel = terrainPixels.get(pixelcount);
           world.add(pixel);
           pixelcount++;
         } else if (c == black) {
-          //terrainPixels.add(new basicterrainPixel(x, y, "stoneblocktexture.jpg", 1, 0));
-          terrainPixels.add(new basicterrainPixel(x, y, "blueBlock.png", 1, 0));
+          terrainPixels.add(new basicterrainPixel(x, y, "stoneblocktexture.jpg", 2.5, 0));
+          //terrainPixels.add(new basicterrainPixel(x, y, "blueBlock.png", 1, 0));
+          FBox pixel = terrainPixels.get(pixelcount);
+          world.add(pixel);
+          pixelcount++;
+        } else if (c == red) {
+          terrainPixels.add(new basicterrainPixel(x, y, skyblue, 0, 1));
           FBox pixel = terrainPixels.get(pixelcount);
           world.add(pixel);
           pixelcount++;
         } else if (c == lightgreen && leftblock == green && rightblock == lightgreen) {
-          //terrainPixels.add(new basicterrainPixel(x, y, "treetop_w.png", 0, 3));
-          terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
+          terrainPixels.add(new basicterrainPixel(x, y, "treetop_w.png", 0, 3));
+          //terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
           FBox treepixel = terrainPixels.get(pixelcount);
           world.add(treepixel);
           pixelcount++;
@@ -103,8 +112,8 @@ void loadWorld(PImage img) {
           world.add(treepixel);
           pixelcount++;
         } else if (c == lightgreen && leftblock == lightgreen && rightblock == green) {
-          //terrainPixels.add(new basicterrainPixel(x, y, "treetop_e.png", 0, 3));
-          terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
+          terrainPixels.add(new basicterrainPixel(x, y, "treetop_e.png", 0, 3));
+          //terrainPixels.add(new basicterrainPixel(x, y, "tree_intersect.png", 0, 3));
           FBox treepixel = terrainPixels.get(pixelcount);
           world.add(treepixel);
           pixelcount++;
@@ -114,8 +123,8 @@ void loadWorld(PImage img) {
           world.add(treepixel);
           pixelcount++;
         } else if (c == orange) {
-          //terrainPixels.add(new basicterrainPixel(x, y, "jumpboostarrow.png", 0, 1));
-          terrainPixels.add(new basicterrainPixel(x, y, "ladder.png", 0, 1));
+          terrainPixels.add(new basicterrainPixel(x, y, "jumpboostarrow.png", 0, 1));
+          //terrainPixels.add(new basicterrainPixel(x, y, "ladder.png", 0, 1));
           FBox jumpboost = terrainPixels.get(pixelcount);
           world.add(jumpboost);
           pixelcount++;
@@ -133,10 +142,22 @@ void loadWorld(PImage img) {
           FBridge bridge = new FBridge(x, y);
           fancyterrain.add(bridge);
           world.add(bridge);
-        } else if (c == darkblue) {
+        } else if (c == blue) {
           FLava lavablock = new FLava(x, y);
           fancyterrain.add(lavablock);
           world.add(lavablock);
+        } else if (c == darkpurple) {
+          FGoomba gmb = new FGoomba(x, y);
+          enemies.add(gmb);
+          world.add(gmb);
+        } else if (c == darkblue && rightblock == darkblue) {
+          FThwomp thwmp = new FThwomp(x+0.5, y);
+          enemies.add(thwmp);
+          world.add(thwmp);
+        } else if (c == lightpurple) {
+          FHammerBro hmbro = new FHammerBro(x, y);
+          enemies.add(hmbro);
+          world.add(hmbro);
         } else if (c == maroon) {
           terrainPixels.add(new basicterrainPixel(x, y, "teleporterblock.png", 0, 4));
           FBox portal = terrainPixels.get(pixelcount);
