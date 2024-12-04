@@ -1,13 +1,19 @@
 class basicterrainPixel extends FBox {
    
-  basicterrainPixel(int x, int y, color pixelcolor, float bounciness) {
+  basicterrainPixel(int x, int y, color pixelcolor, float bounciness, int type) {
     super(gridSize, gridSize);
     setPosition(x*gridSize, y*gridSize);
+    setFriction(1);
     setRestitution(bounciness);
     setFillColor(pixelcolor);
     setGrabbable(false);
     setStatic(true);
     setStroke(pixelcolor);
+    if (type == 1) {
+    setSensor(true);
+    setName("wall");
+    setNoStroke();
+    }
   }
   basicterrainPixel(int x, int y, String _img, float frictionamount, int type) {
     super(gridSize, gridSize);
