@@ -34,7 +34,6 @@ class FBridge extends FGameObject {
      if (transparency < 0) {
        transparency = 0;
      }
-     println(transparency);
      tint (255, transparency);
    }
     if (getY() >= 475) {
