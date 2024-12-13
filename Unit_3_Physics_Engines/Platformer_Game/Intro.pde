@@ -15,12 +15,30 @@ void Intro() {
   textFont (PixelFont);
   textSize(40);
   text ("START", width/2, 520);
+  
+  //HardcoreButton
+  strokeWeight (5);
+  fill (101, 101, 101);
+  RectTactileStroke(width/2, height/2+250, 250, 100);
+  rect (width/2, height/2+250, 250, 100);
+  fill (0);
+  textFont (PixelFont);
+  textSize(30);
+  if (hardcore == false) {
+    text ("Hardcore: Off", width/2, 660);
+  } else if (hardcore == true) {
+    text ("Hardcore: On", width/2, 660);
+  }
+  
 }
 
 void introClicks() {
   //Start
   if (mouseX > 275 && mouseX < 525 && mouseY > 450 && mouseY < 550) {
     mode = GAME;
+  }
+  if (mouseX > 275 && mouseX < 525 && mouseY > 600 && mouseY < 700) {
+    hardcore = !hardcore;
   }
 }
 

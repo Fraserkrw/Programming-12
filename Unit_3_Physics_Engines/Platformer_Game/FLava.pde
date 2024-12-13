@@ -1,9 +1,9 @@
 class FLava extends FGameObject {
-  
+
   PImage[] lava;
   int timer;
   int a = (int) random(0, 6);
-  
+
   FLava(float x, float y) {
     super();
     setPosition(x*gridSize, y*gridSize);
@@ -13,11 +13,11 @@ class FLava extends FGameObject {
     timer = 8;
     lava = new PImage[6];
     for (int i = 0; i < 6; i++) {
-     lava[i] = loadImage("lava"+i+".png");
-     lava[i].resize(gridSize, gridSize);
+      lava[i] = loadImage("lava"+i+".png");
+      lava[i].resize(gridSize, gridSize);
     }
   }
-  
+
   void act() {
     attachImage(lava[a]);
     if (timer > 0) {
@@ -28,7 +28,7 @@ class FLava extends FGameObject {
       timer = 8;
     }
     if (a == 6) {
-    a = 0;
+      a = 0;
     }
   }
 }

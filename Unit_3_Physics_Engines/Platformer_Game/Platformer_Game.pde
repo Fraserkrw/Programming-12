@@ -18,7 +18,6 @@ color red = #ed1c24;
 color green = #22b14c;
 color lightgreen = #a8e61d;
 color brown = #9c5a3c;
-color darkbrown = #2E1A01;
 color orange = #ff7e00;
 color maroon = #990030;
 color yellow = #fff200;
@@ -38,7 +37,7 @@ int currentmap = 0;
 int gridSize = 32;
 int spawnX, spawnY;
 float zoom = 2;
-boolean upkey, leftkey, rightkey, wkey, akey, dkey, skiplevel, zoomout;
+boolean upkey, leftkey, rightkey, wkey, akey, dkey, skey, skiplevel, zoomout, shoot;
 boolean cheatmode = false;
 boolean jumped = false;
 FPlayer player1;
@@ -48,12 +47,17 @@ ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
-boolean playerdied = true;
+boolean playerdied = false;
+boolean hardcore = false;
+float playersafespawnX, playersafespawnY;
+int hp = 100;
 ArrayList<FGameObject> fancyterrain;
 ArrayList<FGameObject> enemies;
+ArrayList<FGameObject1> enemyvariations;
 
 //Images
 PImage Bridgeblock;
+PImage cavebackground;
 
 //Fonts
 PFont PixelFont;
@@ -69,6 +73,7 @@ void setup() {
   
   //Load Images
   Bridgeblock = loadImage("bridge_center.png");
+  cavebackground = loadImage("cavebackground.jpg");
   
   
   totalmaps = 2;
@@ -77,10 +82,12 @@ void setup() {
   maps = new PImage[3];
   maps[0] = loadImage("platformermap1.png");
   maps[1] = loadImage("platformermap2.png");
+  maps[2] = loadImage("platformermap3.png");
   terrainPixels = new ArrayList<FBox>();
   worlds = new ArrayList<FWorld>();
   fancyterrain = new ArrayList<FGameObject>();
   enemies = new ArrayList<FGameObject>();
+  enemyvariations = new ArrayList<FGameObject1>();
 }
 
 void draw() {

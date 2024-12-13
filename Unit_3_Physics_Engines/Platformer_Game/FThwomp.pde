@@ -1,4 +1,4 @@
-class FThwomp extends FGameObject {
+class FThwomp extends FGameObject1 {
   
   PImage sleepingThwomp = loadImage("mariosprites/thwomp0.png");
   PImage angryThwomp = loadImage("mariosprites/thwomp1.png");
@@ -9,6 +9,7 @@ class FThwomp extends FGameObject {
   FThwomp (float x, float y) {
     super();
     setPosition(x*gridSize, y*gridSize+8);
+    setVelocity(0, 0);
     posX = x*gridSize;
     posY = y*gridSize+8;
     setName("thwomp");
@@ -46,14 +47,20 @@ class FThwomp extends FGameObject {
    }
    if (isTouching("player") && player1.getY() >= getY()+(3*gridSize/2)/2) {
      if (cheatmode == false) {
+      if (hardcore == true) {
+      playerdied = true;
       player1.setPosition(spawnX, spawnY);
       setPosition(posX, posY);
       setStatic(true);
       attachImage(sleepingThwomp);
+      } else if (hardcore == false) {
+      playertookthwmpdmg();
+      hp = hp - 50;
+      }
    }
   }
   if (cheatmode == true) {
-    if (getY() >= 960) {
+    if (getY() >= 950) {
      setStatic(true);
     }
   }
@@ -77,4 +84,20 @@ class FThwomp extends FGameObject {
    }
   }
  }
+ 
+  boolean isTouching(String n) {
+    ArrayList<FBox> playercontactList = getTouching();
+    for (int i = 0; i < playercontactList.size(); i++) {
+    FBox boxincontact = playercontactList.get(i);
+    if (boxincontact.getName() == n) {
+      return true;
+    }
+   }
+   return false;
+  }
+  
+  void playertookthwmpdmg() {
+    player1.setVelocity(0, 0);
+    player1.setPosition(player1.getX()-75, player1.getY());
+  }
 }

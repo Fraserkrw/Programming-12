@@ -3,6 +3,7 @@ class FHammerBro extends FGameObject {
   int frame = 0;
   int timer = 100;
   int direction = L;
+  int mapwhencreated = currentmap;
   boolean hammermade = false;
   boolean checkforpos = false;
   int speed = 50;
@@ -43,6 +44,7 @@ class FHammerBro extends FGameObject {
       direction *= -1;
       setPosition(getX()+direction*2, getY());
     }
+    if (mapwhencreated == currentmap) {
     if (hammermade == false) {
     if (timer > 0) {
       timer--;
@@ -64,6 +66,7 @@ class FHammerBro extends FGameObject {
    if (checkforpos == true) {
    if (hammerTouching()) {
      if (cheatmode == false) {
+      playerdied = true;
       player1.setPosition(spawnX, spawnY);
      }
       }
@@ -74,6 +77,7 @@ class FHammerBro extends FGameObject {
       world.remove(hammerobject);
       }
    }
+  }
   }
   
   void move() {

@@ -20,6 +20,9 @@ class basicterrainPixel extends FBox {
     setPosition(x*gridSize, y*gridSize);
     setFriction(frictionamount);
     setGrabbable(false);
+    if (type == 0) {
+    setName("ground");
+    }
     if (type == 1) {
     setName("jumpboost");
     setRestitution(1);
@@ -34,6 +37,10 @@ class basicterrainPixel extends FBox {
     }
     if (type == 4) {
     setName("portal");
+    }
+    if (type == 5) {
+    setSensor(true);
+    setName("ladder");
     }
     PImage img = loadImage(_img);
     img.resize(gridSize, gridSize);
