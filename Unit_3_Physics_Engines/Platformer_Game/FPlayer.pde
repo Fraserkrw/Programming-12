@@ -292,7 +292,6 @@ class FPlayer extends FGameObject {
   }
 
   void shooting() {
-    println(shoot);
     if (fireballmade == false) {
       if (shoot == true) {
         fireballmade = true;

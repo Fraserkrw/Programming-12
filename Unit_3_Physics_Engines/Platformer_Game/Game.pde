@@ -214,77 +214,77 @@ void loadWorld(PImage img) {
         //color topleftblock = img.get(x-1, y-1);
 
         if (c == brown) {
-          if ((leftblock == black || leftblock == green) && rightblock == brown && bottomblock == brown && topblock == brown) {
+          if ((leftblock != brown) && rightblock == brown && bottomblock == brown && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/leftfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && (rightblock == black || rightblock == green) && bottomblock == brown && topblock == brown) {
+          } else if (leftblock == brown && (rightblock != brown) && bottomblock == brown && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/rightfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((leftblock == black || leftblock == green) && rightblock == brown && (bottomblock == black || bottomblock == green) && topblock == brown) {
+          } else if ((leftblock != brown) && rightblock == brown && (bottomblock != brown) && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/bottomleftfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && (rightblock == black || rightblock == green) && (bottomblock == black || bottomblock == green) && topblock == brown) {
+          } else if (leftblock == brown && (rightblock != brown) && (bottomblock != brown) && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/bottomrightfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && rightblock == brown && bottomblock == brown && (topblock == black || topblock == green)) {
+          } else if (leftblock == brown && rightblock == brown && bottomblock == brown && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/topfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && rightblock == brown && (bottomblock == black || leftblock == green) && topblock == brown) {
+          } else if (leftblock == brown && rightblock == brown && (bottomblock != brown) && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/bottomfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((leftblock == black || leftblock == green) && rightblock == brown && bottomblock == brown && (topblock == black || topblock == green)) {
+          } else if ((leftblock != brown) && rightblock != black && bottomblock == brown && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/topleftfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && (rightblock == black || rightblock == green) && bottomblock == brown && (topblock == black || topblock == green)) {
+          } else if (leftblock != black && (rightblock != brown) && bottomblock == brown && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/toprightfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((leftblock == black || leftblock == green) && rightblock == brown && (bottomblock == black || bottomblock == green) && (topblock == black || topblock == green)) {
+          } else if ((leftblock != brown) && rightblock != black && (bottomblock != brown) && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/leftpeninsulablock.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (leftblock == brown && (rightblock == black || rightblock == green) && (bottomblock == black || bottomblock == green) && (topblock == black || topblock == green)) {
+          } else if (leftblock != black && (rightblock != brown) && (bottomblock != brown) && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/rightpeninsulablock.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (rightblock == brown && leftblock == brown && (topblock == black || topblock == green) && (bottomblock == black || bottomblock == green)) {
+          } else if (rightblock == brown && leftblock == brown && (topblock != brown) && (bottomblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/middleblock.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((rightblock == black || rightblock == green) && (leftblock == black || leftblock == green) && topblock == brown && bottomblock == brown) {
+          } else if ((rightblock != brown) && (leftblock != brown) && topblock == brown && bottomblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/middleblockvertical.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((rightblock == black || rightblock == green) && bottomblock == brown && topblock == brown) {
+          } else if ((rightblock != brown) && bottomblock == brown && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/rightfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if ((leftblock == black || leftblock == green) && bottomblock == brown && topblock == brown) {
+          } else if ((leftblock != brown) && bottomblock == brown && topblock == brown) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/leftfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
             pixelcount++;
-          } else if (rightblock == brown && leftblock == brown && (topblock == black || topblock == green)) {
+          } else if (rightblock == brown && leftblock == brown && (topblock != brown)) {
             terrainPixels.add(new basicterrainPixel(x, y, "darkgrassblocktextures/topfacing.jpeg", 1, 0));
             FBox pixel = terrainPixels.get(pixelcount);
             world.add(pixel);
@@ -297,15 +297,37 @@ void loadWorld(PImage img) {
           }
         }
         if (c == green) {
-            terrainPixels.add(new basicterrainPixel(x, y, "ladderblock.jpeg", 1, 5));
-            FBox pixel = terrainPixels.get(pixelcount);
-            world.add(pixel);
-            pixelcount++;
+          terrainPixels.add(new basicterrainPixel(x, y, "ladderblock.jpeg", 1, 5));
+          FBox pixel = terrainPixels.get(pixelcount);
+          world.add(pixel);
+          pixelcount++;
+        } else if (c == red) {
+          terrainPixels.add(new basicterrainPixel(x, y, skyblue, 0, 1));
+          FBox pixel = terrainPixels.get(pixelcount);
+          world.add(pixel);
+          pixelcount++;
+        } else if (c == darkblue) {
+          terrainPixels.add(new basicterrainPixel(x, y, "water1.png", 1, 2));
+          FBox water = terrainPixels.get(pixelcount);
+          world.add(water);
+          pixelcount++;
+        } else if (c == grey) {
+          FLava lavablock = new FLava(x, y);
+          fancyterrain.add(lavablock);
+          world.add(lavablock);
+        } else if (c == darkpurple) {
+          FGoomba gmb = new FGoomba(x, y);
+          enemies.add(gmb);
+          world.add(gmb);
+        } else if (c == yellow) {
+          FBoo boo = new FBoo(x, y);
+          enemies.add(boo);
+          world.add(boo);
         } else if (c == maroon) {
-           terrainPixels.add(new basicterrainPixel(x, y, "teleporterblock.png", 0, 4));
-           FBox portal = terrainPixels.get(pixelcount);
-           world.add(portal);
-           pixelcount++;
+          terrainPixels.add(new basicterrainPixel(x, y, "teleporterblock.png", 0, 4));
+          FBox portal = terrainPixels.get(pixelcount);
+          world.add(portal);
+          pixelcount++;
         }
       }
     }
@@ -333,6 +355,8 @@ void manageMaps() {
   if (mapchange == true) {
     pixelcount = 0;
     terrainPixels.clear();
+    enemies.clear();
+    fancyterrain.clear();
     world.remove(portal);
     currentmap++;
     loadWorld(maps[currentmap]);

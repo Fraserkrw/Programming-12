@@ -13,6 +13,7 @@ class basicterrainPixel extends FBox {
     setSensor(true);
     setName("wall");
     setNoStroke();
+    setNoFill();
     }
   }
   basicterrainPixel(int x, int y, String _img, float frictionamount, int type) {

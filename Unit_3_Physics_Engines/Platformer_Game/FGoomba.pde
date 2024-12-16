@@ -45,8 +45,6 @@ class FGoomba extends FGameObject {
     }
     if (isTouching("player")) {
       if (player1.getY() <= getY()-gridSize/2) {
-        //world.remove(this);
-        //enemies.remove(this);
         settimer = true;
         goombadied = true;
         if (checkforpos == false) {
@@ -91,19 +89,30 @@ class FGoomba extends FGameObject {
         timer = 600;
       }
     }
+    if (isTouching("fireball")) {
+      settimer = true;
+      goombadied = true;
+      if (checkforpos == false) {
+        checkforpos = true;
+        posX = getX();
+        posY = getY()-50;
+      }
+      setPosition (1500, 1500);
+      setStatic(true);
+    }
   }
 
   void move() {
     float vy = getVelocityY();
     setVelocity(speed*direction, vy);
   }
-  
+
   void playertookgmbdmg() {
     player1.setVelocity(0, 0);
     if (direction == R) {
-    player1.setPosition(player1.getX() + 50, player1.getY());
+      player1.setPosition(player1.getX() + 50, player1.getY());
     } else if (direction == L) {
-    player1.setPosition(player1.getX() - 50, player1.getY());
+      player1.setPosition(player1.getX() - 50, player1.getY());
     }
   }
 }
