@@ -49,6 +49,7 @@ boolean setMap = true;
 boolean mapchange = false;
 boolean playerdied = false;
 boolean hardcore = false;
+int playerfacing;
 float playersafespawnX, playersafespawnY;
 int hp = 100;
 ArrayList<FGameObject> fancyterrain;

@@ -354,6 +354,7 @@ void manageMaps() {
   }
   if (mapchange == true) {
     pixelcount = 0;
+    hp = 100;
     terrainPixels.clear();
     enemies.clear();
     fancyterrain.clear();

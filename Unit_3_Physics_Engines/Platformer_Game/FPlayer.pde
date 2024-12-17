@@ -112,6 +112,7 @@ class FPlayer extends FGameObject {
       if (akey) {
         addImpulse(-40, 0);
         facing = left;
+        playerfacing = facing;
         if (jumped == false) {
           attachImage (runningleftimages[i1]);
           i1++;
@@ -123,6 +124,7 @@ class FPlayer extends FGameObject {
       if (dkey) {
         addImpulse(40, 0);
         facing = right;
+        playerfacing = facing;
         if (jumped == false) {
           attachImage (runningrightimages[i2]);
           i2++;
