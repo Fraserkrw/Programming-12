@@ -3,6 +3,8 @@ class FBoo extends FGameObject {
   int direction = L;
   int speed = 50;
   boolean playerinsight = false;
+  boolean readytochase = true;
+  int timer = 100;
   //boolean touchingboundary = false;
 
   FBoo (float x, float y) {
@@ -13,7 +15,6 @@ class FBoo extends FGameObject {
   }
 
   void act() {
-    println(playerinsight);
     animate();
     collide();
     move();
@@ -28,51 +29,56 @@ class FBoo extends FGameObject {
       if (playerinsight == false) {
         direction *= -1;
         setPosition(getX()+direction*2, getY());
+        readytochase = true;
       } else if (playerinsight == true) {
-        setVelocity(0, 0);
-        if (player1.getX() < getX()) {
-          if (playerfacing == R) {
+        if (direction == L) {
+          if (player1.getX() < getX()) {
             setVelocity(0, 0);
-          } else if (playerfacing == L) {
-            direction = R;
-            setPosition(getX()+direction*2, getY());
+          }
+        }
+        if (direction == R) {
+          if (player1.getX() > getX()) {
+            setVelocity(0, 0);
           }
         }
       }
     }
   }
+}
 
-  void move() {
-    if (isTouching("wall") == false) {
+void move() {
+  if (isTouching("wall") == false) {
     if (playerinsight == false) {
       float vy = getVelocityY();
       setVelocity(speed*direction, vy);
     } else if (playerinsight == true) {
-        if (player1.getX() > getX()) {
-          if (playerfacing == R) {
-            setVelocity(150, 0);
-          } else if (playerfacing == L) {
-            setVelocity(0, 0);
-          }
-        } else if (player1.getX() < getX()) {
-          if (playerfacing == L) {
-            setVelocity(-150, 0);
-          } else if (playerfacing == R) {
-            setVelocity(0, 0);
-          }
+      if (player1.getX() > getX()) {
+        if (playerfacing == R) {
+          setVelocity(100, 0);
+          direction = R;
+        } else if (playerfacing == L) {
+          setVelocity(0, 0);
+        }
+      } else if (player1.getX() < getX()) {
+        if (playerfacing == L) {
+          setVelocity(-100, 0);
+          direction = L;
+        } else if (playerfacing == R) {
+          setVelocity(0, 0);
         }
       }
     }
   }
+}
 
 
-  void sense() {
-    if ((player1.getY() >= getY()-50) && (player1.getY() <= getY()+50)) {
-      if ((player1.getX() >= getX()-150) && (player1.getX() <= getX()+150)) {
-        playerinsight = true;
-      }
-    } else {
-      playerinsight = false;
+void sense() {
+  if ((player1.getY() >= getY()-50) && (player1.getY() <= getY()+50)) {
+    if ((player1.getX() >= getX()-100) && (player1.getX() <= getX()+100)) {
+      playerinsight = true;
     }
+  } else {
+    playerinsight = false;
   }
+}
 }

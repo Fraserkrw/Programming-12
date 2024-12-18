@@ -164,7 +164,7 @@ class FPlayer extends FGameObject {
         if (currentmap == 0) {
           setPosition(portal.getX()-10, portal.getY());
         } else if (currentmap == 1) {
-          setPosition(940, portal.getY());
+          setPosition(940, portal.getY()+10);
         }
       }
       skiplevel = false;

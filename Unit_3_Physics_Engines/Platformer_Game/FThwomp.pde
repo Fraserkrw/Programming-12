@@ -68,7 +68,6 @@ class FThwomp extends FGameObject1 {
      if (isTouching("player") == false && (player1.getX() < getX()-(3*gridSize/2)/2 || player1.getX() > getX()+(3*gridSize/2)/2)) {
        if (resettimer > 0) {
         resettimer--;
-        println(resettimer);
        }
       if (resettimer == 0) {
         setPosition(posX, posY);
