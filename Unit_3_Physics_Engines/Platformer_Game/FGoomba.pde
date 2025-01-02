@@ -73,7 +73,6 @@ class FGoomba extends FGameObject {
         setStatic(false);
         checkforpos = true;
         goombadied = false;
-        println("hello");
       }
     }
     if (settimer == true) {
