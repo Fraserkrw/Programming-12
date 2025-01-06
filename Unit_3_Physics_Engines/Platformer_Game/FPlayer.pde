@@ -165,6 +165,8 @@ class FPlayer extends FGameObject {
           setPosition(portal.getX()-10, portal.getY());
         } else if (currentmap == 1) {
           setPosition(940, portal.getY()+10);
+        } else if (currentmap == 2) {
+          setPosition(940, 99);
         }
       }
       skiplevel = false;
@@ -207,6 +209,12 @@ class FPlayer extends FGameObject {
         setVelocity(-vx, 0);
       }
       if (currentmap == 2) {
+        setPosition(50, 10);
+        spawnX = 100;
+        spawnY = 150;
+        setVelocity(-vx, 0);
+      }
+      if (currentmap == 3) {
         setPosition(50, 10);
         spawnX = 100;
         spawnY = 150;
@@ -265,6 +273,11 @@ class FPlayer extends FGameObject {
       facing = right;
     }
     if (currentmap == 2) {
+      setPosition(spawnX, spawnY);
+      setVelocity(0, 0);
+      facing = right;
+    }
+    if (currentmap == 3) {
       setPosition(spawnX, spawnY);
       setVelocity(0, 0);
       facing = right;

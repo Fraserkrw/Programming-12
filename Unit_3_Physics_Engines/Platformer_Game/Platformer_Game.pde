@@ -31,12 +31,9 @@ color darkblue = #2f3699;
 color lightpurple = #b5a5d5;
 
 PImage[] maps;
-PImage mapicon;
-PImage lockicon;
 boolean showmap = false;
 int levelsunlocked = 0;
 int totalmaps;
-int totalWorlds;
 int currentmap = 0;
 int gridSize = 32;
 int spawnX, spawnY;
@@ -47,7 +44,6 @@ boolean jumped = false;
 FPlayer player1;
 FBox portal;
 ArrayList<FBox> terrainPixels;
-ArrayList<FWorld> worlds;
 int pixelcount = 0;
 boolean setMap = true;
 boolean mapchange = false;
@@ -63,6 +59,9 @@ ArrayList<FGameObject1> enemyvariations;
 //Images
 PImage Bridgeblock;
 PImage cavebackground;
+PImage mapicon;
+PImage lockicon;
+PImage skybackground;
 
 //Fonts
 PFont PixelFont;
@@ -81,17 +80,17 @@ void setup() {
   cavebackground = loadImage("cavebackground.jpg");
   mapicon = loadImage("mapimage.png");
   lockicon = loadImage("lockimage.png");
+  skybackground = loadImage("skybackground.png");
   
   
-  totalmaps = 2;
-  totalWorlds = 2;
+  totalmaps = 4;
   Fisica.init(this);
-  maps = new PImage[3];
+  maps = new PImage[totalmaps];
   maps[0] = loadImage("platformermap1.png");
   maps[1] = loadImage("platformermap2.png");
   maps[2] = loadImage("platformermap3.png");
+  maps[3] = loadImage("platformermap4.png");
   terrainPixels = new ArrayList<FBox>();
-  worlds = new ArrayList<FWorld>();
   fancyterrain = new ArrayList<FGameObject>();
   enemies = new ArrayList<FGameObject>();
   enemyvariations = new ArrayList<FGameObject1>();
