@@ -9,6 +9,7 @@ class basicterrainPixel extends FBox {
     setGrabbable(false);
     setStatic(true);
     setStroke(pixelcolor);
+    setName("ground");
     if (type == 1) {
     setSensor(true);
     setName("wall");

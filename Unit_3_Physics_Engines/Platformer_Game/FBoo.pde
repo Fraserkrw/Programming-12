@@ -11,6 +11,9 @@ class FBoo extends FGameObject {
   PImage[] boochill;
   PImage[] boomad;
   int frame = 0;
+  boolean hit = false;
+  int hitnums;
+  int hptimer = 300;
 
   FBoo (float x, float y) {
     super();
@@ -20,6 +23,7 @@ class FBoo extends FGameObject {
     setRotatable(false);
     setDensity(2000);
     setFill(255);
+    setName("mob");
     boochill = new PImage[2];
     boochill[0] = loadImage("ghost1.png");
     boochill[0].resize(gridSize, gridSize);
@@ -37,6 +41,7 @@ class FBoo extends FGameObject {
     collide();
     move();
     sense();
+    hpbar();
   }
 
   void animate() {
@@ -78,15 +83,20 @@ class FBoo extends FGameObject {
       }
     }
     if (isTouching("fireball")) {
-      settimer = true;
-      boodied = true;
-      if (checkforpos == false) {
-        checkforpos = true;
-        posX = getX();
-        posY = getY()-25;
-      }
-      setPosition (1500, 1500);
-      setStatic(true);
+      hit = true;
+      hitnums++;
+      if (hitnums >= 5) {
+        hitnums = 0;
+        settimer = true;
+        boodied = true;
+        if (checkforpos == false) {
+          checkforpos = true;
+          posX = getX();
+          posY = getY()-25;
+        }
+        setPosition (1500, 1500);
+        setStatic(true);
+     }
     }
     if (settimer == true) {
       if (timer > 0) {
@@ -155,7 +165,6 @@ class FBoo extends FGameObject {
     }
   }
 
-
   void sense() {
     if ((player1.getY() >= getY()-50) && (player1.getY() <= getY()+50)) {
       if ((player1.getX() >= getX()-100) && (player1.getX() <= getX()+100)) {
@@ -163,6 +172,43 @@ class FBoo extends FGameObject {
       }
     } else {
       playerinsight = false;
+    }
+  }
+  
+  void hpbar() {
+    if (hit == true) {
+      float cameraX = player1.getX();
+      if (cameraX > 807.6) {
+        cameraX = 807.6;
+      }
+      if (cameraX < 183.78) {
+        cameraX = 183.78;
+      }
+      float cameraY = player1.getY();
+      if (cameraY > 807.6) {
+        cameraY = 807.6;
+      }
+      if (cameraY < 183.78) {
+        cameraY = 183.78;
+      }
+      float screenX = (getX() - cameraX) * zoom + width / 2;
+      float screenY = (getY() - cameraY) * zoom + height / 2 - 20;
+      if (zoomout == false) {
+        fill(grey);
+        stroke(black);
+        rect(screenX, screenY-25, 50, 10);
+        fill(red);
+        noStroke();
+        rect(screenX, screenY-25, 50 - (hitnums * 10), 8);
+      }
+      if (hptimer > 0) {
+        hptimer--;
+      }
+      if (hptimer == 0) {
+        hit = false;
+        hptimer = 300;
+        hitnums = 0;
+      }
     }
   }
 }

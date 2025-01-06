@@ -31,6 +31,10 @@ color darkblue = #2f3699;
 color lightpurple = #b5a5d5;
 
 PImage[] maps;
+PImage mapicon;
+PImage lockicon;
+boolean showmap = false;
+int levelsunlocked = 0;
 int totalmaps;
 int totalWorlds;
 int currentmap = 0;
@@ -75,6 +79,8 @@ void setup() {
   //Load Images
   Bridgeblock = loadImage("bridge_center.png");
   cavebackground = loadImage("cavebackground.jpg");
+  mapicon = loadImage("mapimage.png");
+  lockicon = loadImage("lockimage.png");
   
   
   totalmaps = 2;

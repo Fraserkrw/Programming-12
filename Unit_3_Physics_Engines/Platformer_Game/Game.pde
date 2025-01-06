@@ -16,9 +16,37 @@ void Game() {
   actWorld();
   cheatmodeNotification();
   lives();
+  mapselectorbutton();
+  showmap();
+  //println("X: "+mouseX+" Y: "+mouseY+" ");
 }
 
 void gameClicks() {
+  //Map Button
+  if (mouseX > 675 && mouseX < 775 && mouseY > 25 && mouseY < 125) {
+    showmap = !showmap;
+  }
+
+  //Level Buttons
+  if (mouseX > 200 && mouseX < 300 && mouseY > 260 && mouseY < 360) {
+    currentmap = 0;
+    basicmapreset();
+    showmap = false;
+  }
+  if (mouseX > 350 && mouseX < 450 && mouseY > 260 && mouseY < 360) {
+    if (levelsunlocked >= 1) {
+    currentmap = 1;
+    basicmapreset();
+    showmap = false;
+    }
+  }
+  if (mouseX > 500 && mouseX < 600 && mouseY > 260 && mouseY < 360) {
+    if (levelsunlocked >= 2) {
+    currentmap = 2;
+    basicmapreset();
+    showmap = false;
+    }
+  }
 }
 
 void actWorld() {
@@ -334,9 +362,6 @@ void loadWorld(PImage img) {
   }
 }
 
-
-
-
 void loadPlayer() {
   player1 = new FPlayer();
   world.add(player1);
@@ -360,10 +385,39 @@ void manageMaps() {
     fancyterrain.clear();
     world.remove(portal);
     currentmap++;
+    if (currentmap > levelsunlocked) {
+    levelsunlocked++;
+    }
     loadWorld(maps[currentmap]);
     world.add(player1);
     mapchange = false;
   }
+}
+
+void basicmapreset() {
+  if (currentmap == 0) {
+    player1.setPosition(50, 50);
+  } else if (currentmap == 1) {
+    player1.setPosition(100, 150);
+  } else if (currentmap == 2) {
+    player1.setPosition(50, 150);
+  }
+  player1.setVelocity(0, 0);
+  pixelcount = 0;
+  hp = 100;
+  terrainPixels.clear();
+  enemies.clear();
+  fancyterrain.clear();
+  world.remove(portal);
+  loadWorld(maps[currentmap]);
+  world.add(player1);
+  //if (currentmap == 0) {
+  //  player1.setPosition(100, 100);
+  //} else if (currentmap == 1) {
+  //  player1.setPosition(100, 150);
+  //} else if (currentmap == 2) {
+  //  player1.setPosition(100, 150);
+  //}
 }
 
 void loadingScreen() {
@@ -378,11 +432,11 @@ void cheatmodeNotification() {
   if (cheatmode == true) {
     fill (grey);
     stroke(black);
-    rect(700, 50, 170, 50);
+    rect(100, 110, 170, 50);
     fill(black);
     textFont(PixelFont);
     textSize(20);
-    text("Cheatmode: On", 700, 55);
+    text("Cheatmode: On", 100, 115);
   }
 }
 
@@ -403,5 +457,77 @@ void lives() {
     textFont(PixelFont);
     textSize(30);
     text("Hardcore", 100, 60);
+  }
+}
+
+void mapselectorbutton() {
+  //Button
+  fill (grey);
+  stroke(black);
+  RectTactileStroke(725, 75, 100, 100);
+  rect(725, 75, 100, 100);
+  image(mapicon, 690, 40, 75, 75);
+}
+
+void showmap() {
+  if (showmap == true) {
+    //Screen
+    fill (grey);
+    stroke(black);
+    rect(width/2, height/2, 500, 500);
+
+    //Levels Text
+    textSize(40);
+    fill(black);
+    text("LEVELS", width/2, 210);
+
+    //Level Buttons
+    if (currentmap == 0) { //Intro Level
+      fill (yellow);
+    } else {
+      fill (#393434);
+    }
+    stroke(black);
+    RectTactileStroke(250, 310, 100, 100);
+    rect(250, 310, 100, 100);
+    fill(black);
+    textSize(20);
+    text("INTRO", 250, 315);
+
+    if (currentmap == 1) { //Level 1
+      fill (yellow);
+    } else {
+      fill (#393434);
+    }
+    stroke(black);
+    if (levelsunlocked >= 1) {
+      RectTactileStroke(400, 310, 100, 100);
+    }
+    rect(400, 310, 100, 100);
+    if (levelsunlocked >= 1) {
+      fill(black);
+      textSize(20);
+      text("1", 400, 315);
+    } else {
+      image(lockicon, 375, 280, 50, 60);
+    }
+
+    if (currentmap == 2) { //Level 1
+      fill (yellow);
+    } else {
+      fill (#393434);
+    }
+    stroke(black);
+    if (levelsunlocked >= 2) {
+      RectTactileStroke(550, 310, 100, 100);
+    }
+    rect(550, 310, 100, 100);
+    if (levelsunlocked >= 2) {
+      fill(black);
+      textSize(20);
+      text("2", 550, 315);
+    } else {
+      image(lockicon, 525, 280, 50, 60);
+    }
   }
 }

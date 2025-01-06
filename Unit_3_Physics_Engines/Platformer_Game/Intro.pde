@@ -44,7 +44,7 @@ void introClicks() {
 
 void RectTactileStroke(int x, int y, int w, int h) {
   if (mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2) {
-    stroke (255, 255, 0);
+    stroke (#FFD22C);
   } else {
     stroke (0);
   }

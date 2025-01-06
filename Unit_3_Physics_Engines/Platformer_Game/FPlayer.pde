@@ -195,7 +195,6 @@ class FPlayer extends FGameObject {
     if (isTouching("portal")) {
       loadingScreen();
       if (currentmap == 0) {
-        world.remove(portal);
         setPosition(100, 150);
         spawnX = 100;
         spawnY = 150;
@@ -311,23 +310,39 @@ class FPlayer extends FGameObject {
       }
     }
     if (checkforfireballpos == true) {
-    if (facingwhenfired == L) {
-      if (fireball.getX() < player1.getX()-100) {
-        world.remove(fireball);
-        fireballmade = false;
-        checkforfireballpos = false;
-      } else {
-        fireball.setVelocity(fireball.getVelocityX(), -10);
+      if (facingwhenfired == L) {
+        if (fireball.getX() < player1.getX()-100) {
+          world.remove(fireball);
+          fireballmade = false;
+          checkforfireballpos = false;
+        } else {
+          fireball.setVelocity(fireball.getVelocityX(), -10);
+        }
+      } else if (facingwhenfired == R) {
+        if (fireball.getX() > player1.getX()+100) {
+          world.remove(fireball);
+          fireballmade = false;
+          checkforfireballpos = false;
+        } else {
+          fireball.setVelocity(fireball.getVelocityX(), -10);
+        }
       }
-    } else if (facingwhenfired == R) {
-      if (fireball.getX() > player1.getX()+100) {
+      if (fireballextinguished()) {
         world.remove(fireball);
         fireballmade = false;
         checkforfireballpos = false;
-      } else {
-        fireball.setVelocity(fireball.getVelocityX(), -10);
       }
     }
-   }
+  }
+
+  boolean fireballextinguished() {
+    ArrayList<FBox> fireballcontactList = fireball.getTouching();
+    for (int i = 0; i < fireballcontactList.size(); i++) {
+      FBox boxincontact = fireballcontactList.get(i);
+      if (boxincontact.getName() == "ground" || boxincontact.getName() == "mob") {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -8,13 +8,16 @@ class FGoomba extends FGameObject {
   boolean checkforpos, goombadied;
   boolean settimer = false;
   int timer = 600;
+  int hptimer = 300;
   PImage[] goomba;
+  boolean hit = false;
+  int hitnums;
 
   FGoomba(float x, float y) {
     super();
     setPosition(x*gridSize, y*gridSize);
     setDensity(2000);
-    setName("goomba");
+    setName("mob");
     setRotatable(false);
     goomba = new PImage[2];
     goomba[0] = loadImage("mariosprites/goomba0.png");
@@ -27,6 +30,7 @@ class FGoomba extends FGameObject {
     animate();
     collide();
     move();
+    hpbar();
   }
 
   void animate() {
@@ -81,6 +85,7 @@ class FGoomba extends FGameObject {
       }
       if (timer == 0) {
         setPosition(posX, posY);
+        setVelocity(0, 0);
         setStatic(false);
         checkforpos = true;
         settimer = false;
@@ -89,15 +94,20 @@ class FGoomba extends FGameObject {
       }
     }
     if (isTouching("fireball")) {
-      settimer = true;
-      goombadied = true;
-      if (checkforpos == false) {
-        checkforpos = true;
-        posX = getX();
-        posY = getY()-50;
+      hit = true;
+      hitnums++;
+      if (hitnums >= 5) {
+        hitnums = 0;
+        settimer = true;
+        goombadied = true;
+        if (checkforpos == false) {
+          checkforpos = true;
+          posX = getX();
+          posY = getY()-25;
+        }
+        setPosition (1500, 1500);
+        setStatic(true);
       }
-      setPosition (1500, 1500);
-      setStatic(true);
     }
   }
 
@@ -109,9 +119,46 @@ class FGoomba extends FGameObject {
   void playertookgmbdmg() {
     player1.setVelocity(0, 0);
     if (direction == R) {
-      player1.setPosition(player1.getX() + 50, player1.getY());
+      player1.setPosition(player1.getX() + 20, player1.getY());
     } else if (direction == L) {
-      player1.setPosition(player1.getX() - 50, player1.getY());
+      player1.setPosition(player1.getX() - 20, player1.getY());
+    }
+  }
+
+  void hpbar() {
+    if (hit == true) {
+      float cameraX = player1.getX();
+      if (cameraX > 807.6) {
+        cameraX = 807.6;
+      }
+      if (cameraX < 183.78) {
+        cameraX = 183.78;
+      }
+      float cameraY = player1.getY();
+      if (cameraY > 807.6) {
+        cameraY = 807.6;
+      }
+      if (cameraY < 183.78) {
+        cameraY = 183.78;
+      }
+      float screenX = (getX() - cameraX) * zoom + width / 2;
+      float screenY = (getY() - cameraY) * zoom + height / 2 - 20;
+      if (zoomout == false) {
+        fill(grey);
+        stroke(black);
+        rect(screenX, screenY-25, 50, 10);
+        fill(red);
+        noStroke();
+        rect(screenX, screenY-25, 50 - (hitnums * 10), 8);
+      }
+      if (hptimer > 0) {
+        hptimer--;
+      }
+      if (hptimer == 0) {
+        hit = false;
+        hptimer = 300;
+        hitnums = 0;
+      }
     }
   }
 }
