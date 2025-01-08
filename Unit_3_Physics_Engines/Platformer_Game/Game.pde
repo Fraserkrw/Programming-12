@@ -5,7 +5,6 @@ void Game() {
   if (currentmap == 0) {
     background(brown);
   } else if (currentmap == 1) {
-    //background(darkbrown);
     background(skyblue);
   } else if (currentmap == 2) {
     cavebackground.resize(800, 800);
@@ -21,7 +20,7 @@ void Game() {
   lives();
   mapselectorbutton();
   showmap();
-  println("X: "+mouseX+" Y: "+mouseY+" ");
+  //println("X: "+mouseX+" Y: "+mouseY+" ");
 }
 
 void gameClicks() {
@@ -521,7 +520,11 @@ void manageMaps() {
     enemies.clear();
     fancyterrain.clear();
     world.remove(portal);
-    currentmap++;
+    if (currentmap == 3) {
+      mode = GAMEOVER;
+    } else {
+      currentmap++;
+    }
     if (currentmap > levelsunlocked) {
       levelsunlocked++;
     }
@@ -556,8 +559,13 @@ void loadingScreen() {
   background(black);
   fill(white);
   textFont(PixelFont);
-  textSize(60);
-  text("Loading Next World...", width/2, height/2);
+  if (currentmap == 3) {
+    textSize(40);
+    text("All levels have been completed!", width/2, height/2);
+  } else {
+    textSize(60);
+    text("Loading Next World...", width/2, height/2);
+  }
 }
 
 void cheatmodeNotification() {

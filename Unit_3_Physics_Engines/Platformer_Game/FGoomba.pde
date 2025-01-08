@@ -4,7 +4,7 @@ class FGoomba extends FGameObject {
   int speed = 50;
   int frame = 0;
   int facing;
-  float posX, posY;
+  float posX, posY, orgX, orgY;
   boolean checkforpos, goombadied;
   boolean settimer = false;
   int timer = 600;
@@ -16,6 +16,8 @@ class FGoomba extends FGameObject {
   FGoomba(float x, float y) {
     super();
     setPosition(x*gridSize, y*gridSize);
+    orgX = x*gridSize;
+    orgY = y*gridSize;
     setDensity(2000);
     setName("mob");
     setRotatable(false);
@@ -84,7 +86,7 @@ class FGoomba extends FGameObject {
         timer--;
       }
       if (timer == 0) {
-        setPosition(posX, posY);
+        setPosition(orgX, orgY);
         setVelocity(0, 0);
         setStatic(false);
         checkforpos = true;
