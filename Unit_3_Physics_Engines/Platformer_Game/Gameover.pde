@@ -1,9 +1,13 @@
 void Gameover() {
-  background(#3588FA);
   fill(black);
   textSize(80);
+  if (won == true) {
+  background(#3588FA);
   text("WELL DONE!", width/2, height/3);
-
+  } else {
+  background(#FC3B3B);
+  text("YOU LOST", width/2, height/3);
+  }
   fill(101, 101, 101);
   strokeWeight(5);
   RectTactileStroke (width/2, height/2+50, 200, 100);
@@ -34,6 +38,7 @@ void gameReset() {
   player1.setVelocity(0, 0);
   pixelcount = 0;
   hp = 100;
+  lives = 3;
   terrainPixels.clear();
   enemies.clear();
   fancyterrain.clear();

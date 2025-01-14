@@ -52,6 +52,8 @@ boolean hardcore = false;
 int playerfacing;
 float playersafespawnX, playersafespawnY;
 int hp = 100;
+int lives = 3;
+boolean won;
 ArrayList<FGameObject> fancyterrain;
 ArrayList<FGameObject> enemies;
 ArrayList<FGameObject1> enemyvariations;

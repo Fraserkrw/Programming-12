@@ -80,6 +80,7 @@ class FBoo extends FGameObject {
       if (cheatmode == false) {
         player1.setPosition(spawnX, spawnY);
         playerdied = true;
+        lives--;
       }
     }
     if (isTouching("fireball")) {

@@ -17,6 +17,7 @@ void Game() {
   drawWorld();
   actWorld();
   cheatmodeNotification();
+  hp();
   lives();
   mapselectorbutton();
   showmap();
@@ -521,6 +522,7 @@ void manageMaps() {
     fancyterrain.clear();
     world.remove(portal);
     if (currentmap == 3) {
+      won = true;
       mode = GAMEOVER;
     } else {
       currentmap++;
@@ -580,7 +582,7 @@ void cheatmodeNotification() {
   }
 }
 
-void lives() {
+void hp() {
   if (hardcore == false) {
     fill (grey);
     stroke(black);
@@ -597,6 +599,20 @@ void lives() {
     textFont(PixelFont);
     textSize(30);
     text("Hardcore", 100, 60);
+  }
+}
+
+void lives() {
+  fill (grey);
+  stroke(black);
+  rect(300, 50, 170, 50);
+  fill(black);
+  textFont(PixelFont);
+  textSize(30);
+  text("Lives: " + lives, 300, 60);
+  if (lives == 0) {
+    won = false;
+    mode = GAMEOVER;
   }
 }
 

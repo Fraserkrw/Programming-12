@@ -82,6 +82,7 @@ class FHammerBro extends FGameObject {
           if (cheatmode == false) {
             if (hardcore == true) {
               playerdied = true;
+              lives--;
               player1.setPosition(spawnX, spawnY);
               timer = 100;
               hammermade = false;

@@ -66,6 +66,7 @@ class FGoomba extends FGameObject {
           if (hardcore == true) {
             player1.setPosition(spawnX, spawnY);
             playerdied = true;
+            lives--;
           } else if (hardcore == false) {
             playertookgmbdmg();
             hp = hp - 50;

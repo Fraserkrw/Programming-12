@@ -49,6 +49,7 @@ class FThwomp extends FGameObject1 {
      if (cheatmode == false) {
       if (hardcore == true) {
       playerdied = true;
+      lives--;
       player1.setPosition(spawnX, spawnY);
       setPosition(posX, posY);
       setStatic(true);

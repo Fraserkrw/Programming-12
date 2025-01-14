@@ -287,6 +287,7 @@ class FPlayer extends FGameObject {
     if (hardcore == false) {
       hp = 100;
     }
+    lives--;
   }
 
   void playerpostimer() {
