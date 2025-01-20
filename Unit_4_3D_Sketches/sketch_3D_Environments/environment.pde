@@ -12,11 +12,11 @@ void drawMap() {
     for (int y = 0; y < map.height; y++) {
       color c = map.get(x, y);
       if (c == brown) {
-        for (int i = 1; i < 8; i++) {
+        for (int i = 1; i <= ceilingheight; i++) {
           texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, stoneblock);
         }
       } else if (c == darkgrey) {
-        for (int i = 1; i < 8; i++) {
+        for (int i = 1; i <= ceilingheight; i++) {
           if (i == 1) {
             texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
           }
@@ -28,6 +28,15 @@ void drawMap() {
         texturedCubeAdvanced(x*gridSize-2000, height-gridSize, y*gridSize-2000, gridSize, grasstop, grassbottom, grassside, grassside, grassside, grassside);
         texturedCube(x*gridSize-2000, height-gridSize*4, y*gridSize-2000, gridSize, glowstone);
         //pointLight(252, 218, 142, x*gridSize-4000, height-gridSize*4, y*gridSize-4000);
+      } else if (c == green) {
+        for (int i = 1; i <= ceilingheight; i++) {
+          if (i < ceilingheight-1) {
+            texturedCubeAdvanced(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, oakplank, oakplank, bookshelfsides, bookshelfsides, bookshelfsides, bookshelfsides);
+          }
+          if (i == ceilingheight) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
+          }
+        }
       }
     }
   }

@@ -15,10 +15,10 @@ void controlCamera() {
     eyeX = eyeX+cos(leftRightHeadAngle+PI/2)*20;
     eyeZ = eyeZ+sin(leftRightHeadAngle+PI/2)*20;
   }
-  if (upkey) {
+  if (upkey && canMoveUp()) {
     eyeY = eyeY - 10;
   }
-  if (downkey) {
+  if (downkey && canMoveDown()) {
     eyeY = eyeY + 10;
   }
 
@@ -126,5 +126,34 @@ boolean canMoveBack() {
     return true;
   } else {
     return false;
+  }
+}
+
+
+boolean canMoveUp() {
+  float Up;
+  Up = eyeY;
+  
+  if (Up >= height-gridSize*(ceilingheight-1.5)) {
+  return true;
+  } else {
+  return false;
+  }
+}
+
+boolean canMoveDown() {
+  float Down;
+  Down = eyeY;
+  
+  if (Down <= height-gridSize*(floorheight+1)) {
+  return true;
+  } else {
+  return false;
+  }
+}
+
+void shoot() {
+  if (shoot == true) {
+    objects.add(new Bullet());
   }
 }

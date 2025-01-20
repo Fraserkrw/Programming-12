@@ -12,12 +12,20 @@ color white = #FFFFFF;
 color brown = #9c5a3c;
 color darkgrey = #464646;
 color orange = #ff7e00;
+color green = #22b14c;
 
 //Map variables
 int gridSize;
 PImage map;
-PImage stoneblock, grasstop, grassside, grassbottom, glowstone, darkoak, glass;
-int stacksize;
+PImage stoneblock, glowstone, darkoak, glass;
+PImage grasstop, grassside, grassbottom;
+PImage bookshelfsides, oakplank;
+int ceilingheight = 7;
+int floorheight = 1;
+
+//Game Objects
+ArrayList<GameObject> objects;
+boolean shoot;
 
 boolean wkey, akey, skey, dkey, upkey, downkey;
 float eyeX, eyeY, eyeZ, focusX, focusY, focusZ, tiltX, tiltY, tiltZ;
@@ -27,6 +35,8 @@ void setup() {
   //size(displayWidth, displayHeight, P3D);
   fullScreen(P3D);
   textureMode(NORMAL);
+  
+  objects = new ArrayList<GameObject>();
   wkey = akey = skey = dkey = false;
   eyeX = -68;
   eyeY = height/2;
@@ -59,6 +69,10 @@ void setup() {
   grasstop = loadImage("3D Textures/Grass_Block_Top_C.png");
   grassside = loadImage("3D Textures/Grass_Block_Side.png");
   grassbottom = loadImage("3D Textures/Grass_Block_Bottom.png");
+  
+  //Bookshelf
+  bookshelfsides = loadImage("3D Textures/bookshelf.png");
+  oakplank = loadImage("3D Textures/oakplank.png");
 }
 
 void draw() {
@@ -69,5 +83,14 @@ void draw() {
   drawFocalPoint();
   controlCamera();
   drawMap();
-  println(eyeZ);
+  shoot();
+  
+  for (int i = 0; i < objects.size(); i++) {
+    GameObject obj = objects.get(i);
+    obj.act();
+    obj.show();
+    if (obj.lives == 0) {
+      objects.remove(i);
+    }
+  }
 }

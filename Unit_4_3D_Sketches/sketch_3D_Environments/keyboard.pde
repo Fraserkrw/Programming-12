@@ -5,6 +5,7 @@ void keyPressed() {
   if (key == 'S' || key == 's') skey = true;
   if (keyCode == UP) upkey = true;
   if (keyCode == DOWN) downkey = true;
+  if (keyCode == 32) shoot = true;
 }
 
 void keyReleased() {
@@ -14,4 +15,5 @@ void keyReleased() {
   if (key == 'S' || key == 's') skey = false;
   if (keyCode == UP) upkey = false;
   if (keyCode == DOWN) downkey = false;
+  if (keyCode == 32) shoot = false;
 }
