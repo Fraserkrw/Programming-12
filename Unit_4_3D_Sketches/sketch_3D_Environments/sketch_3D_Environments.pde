@@ -25,9 +25,12 @@ int floorheight = 1;
 
 //Game Objects
 ArrayList<GameObject> objects;
+ArrayList<Fireflies> fireflies;
 boolean shoot;
 
 boolean wkey, akey, skey, dkey, upkey, downkey;
+boolean cheatmode = false;
+boolean check = false;
 float eyeX, eyeY, eyeZ, focusX, focusY, focusZ, tiltX, tiltY, tiltZ;
 float leftRightHeadAngle, upDownHeadAngle;
 
@@ -37,6 +40,7 @@ void setup() {
   textureMode(NORMAL);
   
   objects = new ArrayList<GameObject>();
+  fireflies = new ArrayList<Fireflies>();
   wkey = akey = skey = dkey = false;
   eyeX = -68;
   eyeY = height/2;
@@ -63,7 +67,6 @@ void setup() {
   stoneblock = loadImage("3D Textures/Stone_Bricks.png");
   glowstone = loadImage("3D Textures/glowstone.jpeg");
   darkoak = loadImage("3D Textures/darkoak.jpeg");
-  glass = loadImage("3D Textures/glass.jpg");
 
   //Grassblock
   grasstop = loadImage("3D Textures/Grass_Block_Top_C.png");
@@ -77,13 +80,22 @@ void setup() {
 
 void draw() {
   background(#3BAAFC);
+  if (cheatmode == false) {
   pointLight(255, 255, 255, eyeX, eyeY, eyeZ);
+  } else if (cheatmode == true) {
+  pointLight(109, 116, 109, eyeX, eyeY, eyeZ);
+  }
   drawFloor(-2000, 2000, height, 100);
   //drawFloor(-4000, 4000, height-gridSize*4, 100);
   drawFocalPoint();
   controlCamera();
   drawMap();
   shoot();
+  fireflies(1);
+  //if(check == true) {
+  //println(eyeY);
+  //check = false;
+  //}
   
   for (int i = 0; i < objects.size(); i++) {
     GameObject obj = objects.get(i);
@@ -92,5 +104,11 @@ void draw() {
     if (obj.lives == 0) {
       objects.remove(i);
     }
+  }
+  
+  for (int i = 0; i < fireflies.size(); i++) {
+    Fireflies fly = fireflies.get(i);
+    fly.act();
+    fly.show();
   }
 }

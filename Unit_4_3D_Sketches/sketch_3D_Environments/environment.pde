@@ -41,3 +41,9 @@ void drawMap() {
     }
   }
 }
+
+void fireflies(int n) {
+  for (int i = 0; i <= n; i++) {
+   fireflies.add(new Fireflies());
+  }
+}

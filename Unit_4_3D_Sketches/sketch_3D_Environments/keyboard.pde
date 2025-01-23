@@ -6,6 +6,8 @@ void keyPressed() {
   if (keyCode == UP) upkey = true;
   if (keyCode == DOWN) downkey = true;
   if (keyCode == 32) shoot = true;
+  if (key == 'C' || key == 'c') cheatmode = !cheatmode;
+  if (key == 'O' || key == 'o') check = true;
 }
 
 void keyReleased() {
@@ -16,4 +18,5 @@ void keyReleased() {
   if (keyCode == UP) upkey = false;
   if (keyCode == DOWN) downkey = false;
   if (keyCode == 32) shoot = false;
+  if (key == 'O' || key == 'o') check = false;
 }
