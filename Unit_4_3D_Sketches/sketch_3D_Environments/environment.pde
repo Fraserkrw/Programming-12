@@ -37,13 +37,16 @@ void drawMap() {
             texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
           }
         }
+      } else if (c == skyblue) {
+        for (int i = 1; i <= ceilingheight; i++) {
+          if (i < 4) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, stoneblock);
+          }
+          if (i > 4) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, stoneblock);
+          }
+        }
       }
     }
-  }
-}
-
-void fireflies(int n) {
-  for (int i = 0; i <= n; i++) {
-   fireflies.add(new Fireflies());
   }
 }

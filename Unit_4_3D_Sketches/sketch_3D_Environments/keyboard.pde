@@ -8,6 +8,7 @@ void keyPressed() {
   if (keyCode == 32) shoot = true;
   if (key == 'C' || key == 'c') cheatmode = !cheatmode;
   if (key == 'O' || key == 'o') check = true;
+  if (key == 'F' || key == 'f') spawnmob = true;
 }
 
 void keyReleased() {
@@ -19,4 +20,5 @@ void keyReleased() {
   if (keyCode == DOWN) downkey = false;
   if (keyCode == 32) shoot = false;
   if (key == 'O' || key == 'o') check = false;
+  if (key == 'F' || key == 'f') spawnmob = true;
 }

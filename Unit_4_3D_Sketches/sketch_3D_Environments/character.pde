@@ -196,3 +196,16 @@ void shoot() {
     shoot = false;
   }
 }
+
+void spawnfireflies() {
+  if (spawnmob == true) {
+    fireflies.add(new Fireflies());
+    spawnmob = false;
+  }
+}
+
+void spawnsnow(int n) {
+  for (int i = 0; i < n; i++) {
+    snow.add(new SnowParticle());
+  }
+}

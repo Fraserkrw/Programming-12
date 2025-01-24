@@ -9,10 +9,10 @@ class Particle extends GameObject {
     super(location.x, location.y, location.z, 8);
     randomizer = int(random(-2, 2));
     speed = 10;
-    float vx = cos(radians(random(0,100)));
-    float vy = tan(radians(random(0,100)));
-    float vz = sin(radians(random(0,100)));
-    dir = new PVector (snowballdir.x+(vx*randomizer*75), snowballdir.y+(vy*randomizer*75), -snowballdir.z+vz);
+    float vx = cos(radians(random(-360,360)));
+    float vy = tan(radians(random(-360,360)));
+    float vz = sin(radians(random(-360,360)));
+    dir = new PVector (snowballdir.x+(vx*randomizer*75), snowballdir.y+(vy*randomizer*75), -snowballdir.z+(vz*randomizer*75));
     dir.setMag(speed);
   }
   
@@ -27,7 +27,6 @@ class Particle extends GameObject {
     }
     if (timer == 0) {
     lives = 0;
-    println("gone");
     }
   }
 }

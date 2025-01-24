@@ -13,6 +13,10 @@ color brown = #9c5a3c;
 color darkgrey = #464646;
 color orange = #ff7e00;
 color green = #22b14c;
+color skyblue = #00b7ef;
+color purple = #4d6df3;
+color fireflylight = #E5F75F;
+color fireflylight1 = #FACE56;
 
 //Map variables
 int gridSize;
@@ -26,11 +30,12 @@ int floorheight = 1;
 //Game Objects
 ArrayList<GameObject> objects;
 ArrayList<Fireflies> fireflies;
+ArrayList<SnowParticle> snow;
 boolean shoot;
+int snownums = 100;
 
 boolean wkey, akey, skey, dkey, upkey, downkey;
-boolean cheatmode = false;
-boolean check = false;
+boolean cheatmode, check, spawnmob;
 float eyeX, eyeY, eyeZ, focusX, focusY, focusZ, tiltX, tiltY, tiltZ;
 float leftRightHeadAngle, upDownHeadAngle;
 
@@ -41,7 +46,10 @@ void setup() {
   
   objects = new ArrayList<GameObject>();
   fireflies = new ArrayList<Fireflies>();
+  snow = new ArrayList<SnowParticle>();
+  spawnsnow(snownums);
   wkey = akey = skey = dkey = false;
+  cheatmode = check = spawnmob = false;
   eyeX = -68;
   eyeY = height/2;
   eyeZ = 70;
@@ -69,7 +77,6 @@ void setup() {
   darkoak = loadImage("3D Textures/darkoak.jpeg");
 
   //Grassblock
-  grasstop = loadImage("3D Textures/Grass_Block_Top_C.png");
   grassside = loadImage("3D Textures/Grass_Block_Side.png");
   grassbottom = loadImage("3D Textures/Grass_Block_Bottom.png");
   
@@ -90,12 +97,12 @@ void draw() {
   drawFocalPoint();
   controlCamera();
   drawMap();
+  spawnfireflies();
   shoot();
-  fireflies(1);
-  //if(check == true) {
-  //println(eyeY);
-  //check = false;
-  //}
+  if(check == true) {
+  println(eyeY);
+  check = false;
+  }
   
   for (int i = 0; i < objects.size(); i++) {
     GameObject obj = objects.get(i);
@@ -105,10 +112,14 @@ void draw() {
       objects.remove(i);
     }
   }
-  
   for (int i = 0; i < fireflies.size(); i++) {
     Fireflies fly = fireflies.get(i);
     fly.act();
     fly.show();
+  }
+  for (int i = 0; i < snownums; i++) {
+    SnowParticle snowparticle = snow.get(i);
+    snowparticle.show();
+    snowparticle.act();
   }
 }
