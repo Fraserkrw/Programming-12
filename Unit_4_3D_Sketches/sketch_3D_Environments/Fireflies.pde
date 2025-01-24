@@ -16,7 +16,7 @@ class Fireflies {
   Fireflies() {
     x = int(random(0, 4000)/gridSize);
     z = int(random(0, 4000)/gridSize);
-    fireflyZ = int(random(400, 750));
+    fireflyZ = int(random(500, 750));
     size = 10;
     speed = random(1, 5);
     blink = int(random(-2, 2));
@@ -64,7 +64,7 @@ class Fireflies {
       dir.z *= -1;
       location.add(dir);
     }
-    if (location.y <= 400 || location.y >= 750) {
+    if (location.y <= 500 || location.y >= 750) {
       dir.y *= -1;
     }
   }

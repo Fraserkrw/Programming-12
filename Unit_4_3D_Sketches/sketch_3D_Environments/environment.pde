@@ -24,10 +24,6 @@ void drawMap() {
             texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
           }
         }
-      } else if (c == orange) {
-        texturedCubeAdvanced(x*gridSize-2000, height-gridSize, y*gridSize-2000, gridSize, grasstop, grassbottom, grassside, grassside, grassside, grassside);
-        texturedCube(x*gridSize-2000, height-gridSize*4, y*gridSize-2000, gridSize, glowstone);
-        //pointLight(252, 218, 142, x*gridSize-4000, height-gridSize*4, y*gridSize-4000);
       } else if (c == green) {
         for (int i = 1; i <= ceilingheight; i++) {
           if (i < ceilingheight-1) {
@@ -44,6 +40,30 @@ void drawMap() {
           }
           if (i > 4) {
             texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, stoneblock);
+          }
+        }
+      } else if (c == red) {
+        for (int i = 1; i <= ceilingheight; i++) {
+          if (i == 1) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
+          }
+          if (i > 1 && i < ceilingheight-2) {
+            texturedCubeAdvanced(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, barreltop, barreltop, barrelside, barrelside, barrelside, barrelside);
+          }
+          if (i == ceilingheight) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
+          }
+        }
+      } else if (c == orange) {
+        for (int i = 1; i <= ceilingheight; i++) {
+          if (i == 1) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
+          }
+          if (i > 1 && i < ceilingheight-1) {
+            texturedCubeAdvanced(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, furnacetop, furnacetop, furnaceside, furnaceside, furnacefront, furnaceside);
+          }
+          if (i == ceilingheight) {
+            texturedCube(x*gridSize-2000, height-gridSize*i, y*gridSize-2000, gridSize, darkoak);
           }
         }
       }

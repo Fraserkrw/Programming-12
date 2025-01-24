@@ -15,6 +15,7 @@ color orange = #ff7e00;
 color green = #22b14c;
 color skyblue = #00b7ef;
 color purple = #4d6df3;
+color red = #ed1c24;
 color fireflylight = #E5F75F;
 color fireflylight1 = #FACE56;
 
@@ -24,6 +25,8 @@ PImage map;
 PImage stoneblock, glowstone, darkoak, glass;
 PImage grasstop, grassside, grassbottom;
 PImage bookshelfsides, oakplank;
+PImage barreltop, barrelside;
+PImage furnacefront, furnaceside, furnacetop;
 int ceilingheight = 7;
 int floorheight = 1;
 
@@ -32,7 +35,7 @@ ArrayList<GameObject> objects;
 ArrayList<Fireflies> fireflies;
 ArrayList<SnowParticle> snow;
 boolean shoot;
-int snownums = 100;
+int snownums = 1000;
 
 boolean wkey, akey, skey, dkey, upkey, downkey;
 boolean cheatmode, check, spawnmob;
@@ -47,7 +50,6 @@ void setup() {
   objects = new ArrayList<GameObject>();
   fireflies = new ArrayList<Fireflies>();
   snow = new ArrayList<SnowParticle>();
-  spawnsnow(snownums);
   wkey = akey = skey = dkey = false;
   cheatmode = check = spawnmob = false;
   eyeX = -68;
@@ -83,6 +85,17 @@ void setup() {
   //Bookshelf
   bookshelfsides = loadImage("3D Textures/bookshelf.png");
   oakplank = loadImage("3D Textures/oakplank.png");
+  
+  //Barrel
+  barreltop = loadImage("3D Textures/barreltop.jpeg");
+  barrelside = loadImage("3D Textures/barrelside.jpeg");
+  
+  //Furnace
+  furnacetop = loadImage("3D Textures/furnacetop.jpeg");
+  furnaceside = loadImage("3D Textures/furnaceside.jpeg");
+  furnacetop = loadImage("3D Textures/furnacetop.jpeg");
+  
+  spawnsnow(snownums);
 }
 
 void draw() {
@@ -112,14 +125,14 @@ void draw() {
       objects.remove(i);
     }
   }
-  for (int i = 0; i < fireflies.size(); i++) {
-    Fireflies fly = fireflies.get(i);
-    fly.act();
-    fly.show();
-  }
   for (int i = 0; i < snownums; i++) {
     SnowParticle snowparticle = snow.get(i);
     snowparticle.show();
     snowparticle.act();
+  }
+  for (int i = 0; i < fireflies.size(); i++) {
+    Fireflies fly = fireflies.get(i);
+    fly.act();
+    fly.show();
   }
 }
